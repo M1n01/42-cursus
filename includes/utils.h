@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/05/17 18:28:26 by minabe           ###   ########.fr       */
+/*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
+/*   Updated: 2023/05/17 17:56:06 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-int	main(int argc, char *argv[])
-{
-	if (argc == 4 || argc == 5)
-	{
-		philo(argc, argv);
-	}
-	else
-		return (1);
-	return (0);
-}
+#include <limits.h>
+#include <stdlib.h>
+
+#endif
