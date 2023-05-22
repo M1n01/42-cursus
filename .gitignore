@@ -7,3 +7,4 @@ a.out*
 *.o
 */debug*
 README.md
+philo

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/05/17 17:30:43 by minabe           ###   ########.fr       */
+/*   Updated: 2023/05/22 13:55:40 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,20 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <stdbool.h>
+
+typedef struct s_philo
+{
+	int	number_of_philosophers;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	number_of_times_each_philosopher_must_eat;
+	bool	*fork;
+	pthread_mutex_t	mutex;
+}	t_philo;
+
+t_philo	*init_philo(int argc, char *argv[]);
+void	destroy_philo(t_philo *philo);
 
 #endif
