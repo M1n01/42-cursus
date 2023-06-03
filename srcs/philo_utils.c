@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/05/31 11:17:02 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/01 17:12:09 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_philo	*init_philo(int argc, char *argv[])
 		philo->fork[i] = true;
 		i++;
 	}
+	philo->right = -1;
+	philo->left = -1;
 	pthread_mutex_init(&philo->mutex, NULL);
 	return (philo);
 }
