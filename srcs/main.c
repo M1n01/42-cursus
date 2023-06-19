@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/03 14:37:33 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/03 15:23:17 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	*philo_eat(void *data)
 	philo = (t_philo *)data;
 	pthread_mutex_lock(&philo->mutex);
 	gettimeofday(&tv, NULL);
+	philo->fork[philo->right] = false;
+	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
+	printf("%d has taken a fork\n", philo->right + 1);
+	philo->fork[philo->left] = false;
+	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
+	printf("%d has taken a fork\n", philo->right + 1);
 	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
 	printf("%d is eating\n", philo->right + 1);
 	pthread_mutex_unlock(&philo->mutex);
@@ -37,12 +43,6 @@ void	*philo_sleep(void *data)
 	philo = (t_philo *)data;
 	pthread_mutex_lock(&philo->mutex);
 	gettimeofday(&tv, NULL);
-	philo->fork[philo->right] = false;
-	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
-	printf("%d has taken a fork\n", philo->right + 1);
-	philo->fork[philo->left] = false;
-	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
-	printf("%d has taken a fork\n", philo->right + 1);
 	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
 	printf("%d is sleeping\n", philo->right + 1);
 	usleep(philo->time_to_sleep * 1000);
