@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/03 15:23:17 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/21 09:51:37 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,10 @@ void	philo(int argc, char *argv[])
 		return ;
 
 	gettimeofday(&tv, NULL);
-	forks = philo->fork;
 	i = 0;
 	while (i < philo->number_of_philosophers)
 	{
-		philo->right = i;
-		philo->left = (i + 1) % philo->number_of_philosophers;
-		if (forks[philo->right] == true && forks[philo->left] == true)
-		{
-			pthread_create(&tid[i], NULL, philo_eat, philo);
-		}
-		else
-		{
-			pthread_create(&tid[i], NULL, philo_sleep, philo);
-		}
+		
 		// pthread_join(tid[i], NULL);
 		i++;
 	}
@@ -89,13 +79,6 @@ void	philo(int argc, char *argv[])
 	pthread_join(tid[1], NULL);
 	pthread_join(tid[2], NULL);
 	pthread_join(tid[3], NULL);
-	i = 0;
-	while (i < philo->number_of_philosophers)
-	{
-		printf("%d\n", philo->fork[i]);
-		// pthread_join(tid[i], NULL);
-		i++;
-	}
 	// pthread_create(&tid[2], NULL, think, philo);
 	// pthread_join(tid[2], NULL);
 

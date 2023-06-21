@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/05/31 22:53:14 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/21 09:49:05 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,6 @@ typedef struct s_philo
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	right;
-	int	left;
-	int	number_of_times_each_philosopher_must_eat;
-	bool	*fork;
-	pthread_mutex_t	mutex;
 }	t_philo;
 
 t_philo	*init_philo(int argc, char *argv[]);
