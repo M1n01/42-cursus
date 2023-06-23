@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 21:37:41 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 22:50:45 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < data->num_philos)
 	{
+		printf("philo[%d]\n", i);
 		data->id = i;
 		pthread_create(&philo[i], NULL, philosopher, data);
 		i++;
@@ -68,6 +69,12 @@ int	main(int argc, char *argv[])
 	while (i < data->num_philos)
 	{
 		pthread_join(philo[i], NULL);
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
 	free(philo);

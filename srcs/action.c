@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 21:35:19 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 22:50:53 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	take_first_fork(t_data *data)
 {
 	struct timeval	tv;
 
-	pthread_mutex_lock(&data->forks[first(data)]);
+	// pthread_mutex_lock(&data->forks[first(data)]);
 	gettimeofday(&tv, NULL);
 	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
 	printf("%d has taken a fork (%d)\n", data->id + 1, first(data) + 1);
@@ -26,7 +26,7 @@ void	take_second_fork(t_data *data)
 {
 	struct timeval	tv;
 
-	pthread_mutex_lock(&data->forks[second(data)]);
+	// pthread_mutex_lock(&data->forks[second(data)]);
 	gettimeofday(&tv, NULL);
 	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
 	printf("%d has taken a fork (%d)\n", data->id + 1, second(data) + 1);
