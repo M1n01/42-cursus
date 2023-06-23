@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 15:59:32 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 19:29:07 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,18 @@ void	*philosopher(void *d)
 
 int	main(int argc, char *argv[])
 {
-	int		i;
+	int			i;
 	t_data		*data;
 	pthread_t	*philo;
 
 	if (argc != 5 && argc != 6)
-		return (1);
+		return (EXIT_FAILURE);
 	data = init_data(argc, argv);
+	if (data == NULL)
+		return (EXIT_FAILURE);
 	philo = malloc(sizeof(pthread_t) * data->num_philos);
 	if (philo == NULL)
-		exit(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	i = 0;
 	while (i < data->num_philos)
 	{
