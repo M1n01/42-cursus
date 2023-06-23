@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 19:29:07 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 19:52:33 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*philosopher(void *d)
 		i = 0;
 		while (i < data->time.num_of_times_each_philo_must_eat)
 		{
-			get_forks(data);
+			take_forks(data);
 			eating(data);
 			put_forks(data);
 			sleeping(data);

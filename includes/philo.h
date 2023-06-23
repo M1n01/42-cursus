@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 15:57:05 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 19:45:30 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	destroy_data(t_data *data);
 
 void	eating(t_data *data);
 void	sleeping(t_data *data);
-void	get_forks(t_data *data);
+void	take_forks(t_data *data);
 void	put_forks(t_data *data);
 
 int	first(t_data *data);
