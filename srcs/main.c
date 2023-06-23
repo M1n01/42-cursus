@@ -6,28 +6,50 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/21 20:02:30 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:59:32 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	philosopher(void *data)
+void	*philosopher(void *d)
 {
-	t_philo	*philo;
-	struct timeval tv;
+	int		i;
+	t_data	*data;
 
-	philo = (t_philo *)data;
-	gettimeofday(&tv, NULL);
-	eating(philo);
-	sleeping(philo);
-	thinking(philo);
+	data = (t_data *)d;
+	if (data->time.num_of_times_each_philo_must_eat >= 0)
+	{
+		i = 0;
+		while (i < data->time.num_of_times_each_philo_must_eat)
+		{
+			get_forks(data);
+			eating(data);
+			put_forks(data);
+			sleeping(data);
+			// thinking(data);
+			i++;
+		}
+	}
+	else
+	{
+		// while (true)
+		// {
+		// 	get_forks(data);
+		// 	eating(data);
+		// 	put_forks(data);
+		// 	sleeping(data);
+		// 	// thinking(data);
+		// }
+		printf("4つ目の引数が負の値です\n");
+	}
+	return (NULL);
 }
 
 int	main(int argc, char *argv[])
 {
-	size_t	i;
-	t_philo		*data;
+	int		i;
+	t_data		*data;
 	pthread_t	*philo;
 
 	if (argc != 5 && argc != 6)
@@ -39,7 +61,8 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < data->num_philos)
 	{
-		pthread_create(philo[i], NULL, philosopher, data);
+		data->id = i;
+		pthread_create(&philo[i], NULL, philosopher, data);
 		i++;
 	}
 	i = 0;
@@ -48,8 +71,8 @@ int	main(int argc, char *argv[])
 		pthread_join(philo[i], NULL);
 		i++;
 	}
-	ft_free(philo);
-	destroy_philo(data);
+	free(philo);
+	destroy_data(data);
 	// system("leaks -q philo");
 	return (0);
 }

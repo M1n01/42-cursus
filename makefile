@@ -1,7 +1,7 @@
 NAME = philo
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCDIR))
+CFLAGS = -Wall -Wextra -Werror -pthread $(addprefix -I,$(INCDIR))
 
 INCDIR = ./includes
 INC = $(shell find $(INCDIR) -name "*.h" -type f | xargs)

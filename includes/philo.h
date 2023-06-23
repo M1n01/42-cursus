@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/21 19:24:25 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 15:57:05 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,26 @@ typedef struct s_time
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;
+	int	num_of_times_each_philo_must_eat;
 }	t_time;
 
-typedef struct s_philo
+typedef struct s_data
 {
-	int		num_philos;
-	t_time	time;
-}	t_philo;
+	int				id;
+	int				num_philos;
+	t_time			time;
+	pthread_mutex_t	*forks;
+}	t_data;
 
-t_philo	*init_data(int argc, char *argv[]);
-void	destroy_philo(t_philo *philo);
+t_data	*init_data(int argc, char *argv[]);
+void	destroy_data(t_data *data);
+
+void	eating(t_data *data);
+void	sleeping(t_data *data);
+void	get_forks(t_data *data);
+void	put_forks(t_data *data);
+
+int	first(t_data *data);
+int	second(t_data *data);
 
 #endif
