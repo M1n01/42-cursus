@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 19:54:12 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 21:35:19 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	eating(t_data *data)
 	gettimeofday(&tv, NULL);
 	printf("%ld%d ", tv.tv_sec, tv.tv_usec / 1000);
 	printf("%d is eating\n", data->id + 1);
+	printf("id: %d, eat_count: %d\n", data->id + 1, data->eat_count);
+	data->eat_count++;
 	usleep(data->time.time_to_eat * 1000);
 }
 

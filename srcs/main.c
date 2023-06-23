@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 19:52:33 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/23 21:37:41 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,18 @@
 
 void	*philosopher(void *d)
 {
-	int		i;
 	t_data	*data;
 
 	data = (t_data *)d;
-	if (data->time.num_of_times_each_philo_must_eat >= 0)
+	if (data->num_of_times_each_philo_must_eat >= 0)
 	{
-		i = 0;
-		while (i < data->time.num_of_times_each_philo_must_eat)
+		while (data->eat_count < data->num_of_times_each_philo_must_eat)
 		{
 			take_forks(data);
 			eating(data);
 			put_forks(data);
 			sleeping(data);
 			// thinking(data);
-			i++;
 		}
 	}
 	else
