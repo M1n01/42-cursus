@@ -8,3 +8,4 @@ a.out*
 */debug*
 README.md
 philo
+*.dSYM
