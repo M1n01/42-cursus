@@ -6,30 +6,44 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:41:05 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/23 19:29:34 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:26:14 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	first(t_data *data)
+int	first(t_philo *philo_data)
 {
-	int id;
+	int	right;
+	int	left;
 
-	if (data->id < (data->id + 1) % data->num_philos)
-		id = data->id;
+	right = philo_data->id;
+	left = (philo_data->id + 1) % philo_data->data.num_philos;
+	if (philo_data->id % 2 == 0)
+		return (right);
 	else
-		id = (data->id + 1) % data->num_philos;
-	return (id);
+		return (left);
 }
 
-int	second(t_data *data)
+int	second(t_philo *philo_data)
 {
-	int id;
+	int	right;
+	int	left;
 
-	if (data->id < (data->id + 1) % data->num_philos)
-		id = (data->id + 1) % data->num_philos;
+	right = philo_data->id;
+	left = (philo_data->id + 1) % philo_data->data.num_philos;
+	if (philo_data->id % 2 == 0)
+		return (left);
 	else
-		id = data->id;
-	return (id);
+		return (right);
+}
+
+long long	get_time(void)
+{
+	struct timeval	tv;
+	long long		time;
+
+	gettimeofday(&tv, NULL);
+	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	return (time);
 }
