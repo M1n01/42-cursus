@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:40:46 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:25:25 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ t_data	*init_data(int argc, char *argv[])
 	if (argc == 6)
 		data->num_of_times_each_philo_must_eat = atoi(argv[5]);
 	else
-		data->num_of_times_each_philo_must_eat = -1;
+		data->num_of_times_each_philo_must_eat = NOT_SET;
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos); // エラー起きたら確認
 	if (data->forks == NULL)
 		return (NULL);
 	i = 0;
 	while (i < data->num_philos)
 	{
-		pthread_mutex_init(&data->forks[i], NULL);
+		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+			return (NULL);
 		i++;
 	}
 	return (data);

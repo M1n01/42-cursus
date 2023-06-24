@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:30:21 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:21:17 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,7 @@ void	*philosopher(void *d)
 	t_philo	*philo_data;
 
 	philo_data = (t_philo *)d;
-	if (philo_data->data.num_of_times_each_philo_must_eat >= 0)
-	{
-		while (philo_data->eat_count < philo_data->data.num_of_times_each_philo_must_eat)
-		{
-			take_forks(philo_data);
-			eating(philo_data);
-			put_forks(philo_data);
-			sleeping(philo_data);
-			// thinking(philo_data);
-		}
-	}
-	else
+	if (philo_data->data.num_of_times_each_philo_must_eat == NOT_SET)
 	{
 		// while (true)
 		// {
@@ -40,6 +29,18 @@ void	*philosopher(void *d)
 		// }
 		printf("4つ目の引数を入れてください\n");
 	}
+	else
+	{
+		while (philo_data->eat_count < philo_data->data.num_of_times_each_philo_must_eat)
+		{
+			take_forks(philo_data);
+			eating(philo_data);
+			put_forks(philo_data);
+			sleeping(philo_data);
+			// フォークが空くまでthinkする
+			// thinking(philo_data);
+		}
+	}
 	return (NULL);
 }
 
@@ -48,15 +49,15 @@ int	main(int argc, char *argv[])
 	int			i;
 	t_data		*data;
 	t_philo		**philo_data;
-	pthread_t	*philosophers;
+	pthread_t	*philos;
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
 	data = init_data(argc, argv);
 	if (data == NULL)
 		return (EXIT_FAILURE);
-	philosophers = malloc(sizeof(pthread_t) * data->num_philos);
-	if (philosophers == NULL)
+	philos = malloc(sizeof(pthread_t) * data->num_philos);
+	if (philos == NULL)
 		return (EXIT_FAILURE);
 	philo_data = malloc(sizeof(t_philo *) * data->num_philos);
 	if (philo_data == NULL)
@@ -67,13 +68,14 @@ int	main(int argc, char *argv[])
 		philo_data[i] = philo_data_init(data, i);
 		if (philo_data == NULL)
 			return (EXIT_FAILURE);
-		pthread_create(&philosophers[i], NULL, philosopher, philo_data[i]);
+		if (pthread_create(&philos[i], NULL, philosopher, philo_data[i]) != 0)
+			return (EXIT_FAILURE);
 		i++;
 	}
 	i = 0;
 	while (i < data->num_philos)
 	{
-		pthread_join(philosophers[i], NULL);
+		pthread_join(philos[i], NULL);
 		free(&philo_data[i]);
 		i++;
 	}

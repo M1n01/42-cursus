@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 18:36:59 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:41:46 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:54:11 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	my_atoi(const char *str)
 		if (!isdigit(str[i]))
 			return (-1);
 		if ((nbr * 10 + (str[i] - '0')) / 10 != nbr)
-				return (-1);
+			return (-1);
 		nbr = nbr * 10 + (str[i] - '0');
 		i++;
 	}
