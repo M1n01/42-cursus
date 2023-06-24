@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 22:00:16 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:09:16 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,19 @@ int	main(int argc, char *argv[])
 	philo_data = malloc(sizeof(t_philo *) * data->num_philos);
 	if (philo_data == NULL)
 		return (EXIT_FAILURE);
-	philo_data = NULL;
-	if (create_philo_threads(data, philos, philo_data) == EXIT_FAILURE)
+	philo_data = malloc(sizeof(t_philo *) * data->num_philos);
+	if (philo_data == NULL)
 		return (EXIT_FAILURE);
+	i = 0;
+	while (i < data->num_philos)
+	{
+		philo_data[i] = philo_data_init(data, i);
+		if (philo_data == NULL)
+			return (EXIT_FAILURE);
+		if (pthread_create(&philos[i], NULL, philosopher, philo_data[i]) != 0)
+			return (EXIT_FAILURE);
+		i++;
+	}
 	i = 0;
 	while (i < data->num_philos)
 	{
@@ -74,12 +84,6 @@ int	main(int argc, char *argv[])
 	}
 	destroy_data(data);
 	free(philo_data);
-	i = 0;
-	while (i < data->num_philos)
-	{
-		pthread_mutex_destroy(&data->forks[i]);
-		i++;
-	}
 	// system("leaks -q philo");
 	return (0);
 }
