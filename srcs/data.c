@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 21:25:25 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 22:02:53 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ t_philo	*philo_data_init(t_data *data, int id)
 
 void	destroy_data(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (i < data->num_philos)
+	{
+		pthread_mutex_destroy(&data->forks[i]);
+		i++;
+	}
 	free(data->forks);
 	free(data);
 }

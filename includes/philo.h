@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 21:22:15 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 21:59:02 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ typedef struct s_philo
 	int				eat_count;
 	t_data			data;
 }	t_philo;
+
+void		*philosopher(void *d);
+int			create_philo_threads(t_data *data, pthread_t *philos, t_philo **philo_data);
 
 t_data		*init_data(int argc, char *argv[]);
 t_philo		*philo_data_init(t_data *data, int id);
