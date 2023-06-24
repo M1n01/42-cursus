@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:14:44 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/24 18:42:06 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void	put_forks(t_philo *philo_data);
 int	first(t_philo *philo_data);
 int	second(t_philo *philo_data);
 long long	get_time(void);
+int			my_atoi(const char *str);
 
 #endif

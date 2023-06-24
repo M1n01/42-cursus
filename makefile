@@ -11,10 +11,14 @@ SRCDIR = ./srcs
 SRCS = $(shell find $(SRCDIR) -name "*.c" -type f | xargs)
 OBJS = $(SRCS:%.c=%.o)
 
+UTILSDIR = ./utils
+UTILS = $(shell find $(UTILSDIR) -name "*.c" -type f | xargs)
+U_OBJS = $(UTILS:%.c=%.o)
+
 all: $(NAME)
 
-$(NAME): $(OBJS)
-		$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS) $(U_OBJS)
+		$(CC) $(CFLAGS) $(SRCS) $(U_OBJS) -o $(NAME)
 
 clean:
 		$(RM) $(OBJS) $(B_OBJS)
