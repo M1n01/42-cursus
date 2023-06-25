@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 21:59:02 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:18:09 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,21 @@ typedef struct s_data
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				num_of_times_each_philo_must_eat;
+	long long		start_time;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	log;
 }	t_data;
 
 typedef struct s_philo
 {
-	int				id;
-	int				eat_count;
-	t_data			data;
+	int			id;
+	int			eat_count;
+	long long	last_eat_time;
+	bool		is_dead;
+	t_data		data;
 }	t_philo;
 
 void		*philosopher(void *d);
-int			create_philo_threads(t_data *data, pthread_t *philos, t_philo **philo_data);
 
 t_data		*init_data(int argc, char *argv[]);
 t_philo		*philo_data_init(t_data *data, int id);
@@ -50,10 +53,13 @@ void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);
 void		take_forks(t_philo *philo_data);
 void		put_forks(t_philo *philo_data);
+void		thinking(t_philo *philo_data);
 
 int			first(t_philo *philo_data);
 int			second(t_philo *philo_data);
 long long	get_time(void);
+long long	get_time_diff(long long time);
+void		print_time_diff(long long time);
 int			my_atoi(const char *str);
 
 #endif

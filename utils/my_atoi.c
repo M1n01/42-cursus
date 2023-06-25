@@ -6,13 +6,13 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 18:36:59 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:54:11 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:40:22 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static bool	isdigit(int c)
+static bool	my_isdigit(int c)
 {
 	if ('0' <= c && c <= '9')
 		return (true);
@@ -28,7 +28,7 @@ int	my_atoi(const char *str)
 	nbr = 0;
 	while (str[i] != '\0')
 	{
-		if (!isdigit(str[i]))
+		if (!my_isdigit(str[i]))
 			return (-1);
 		if ((nbr * 10 + (str[i] - '0')) / 10 != nbr)
 			return (-1);
