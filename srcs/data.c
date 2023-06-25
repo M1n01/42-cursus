@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/25 17:19:09 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:48:12 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_data	*init_data(int argc, char *argv[])
 		i++;
 	}
 	data->start_time = get_time();
+	pthread_mutex_init(&data->log, NULL);
 	return (data);
 }
 
