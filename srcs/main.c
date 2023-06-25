@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/25 17:41:51 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/25 17:53:54 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*check_death(void *d)
 			// pthread_mutex_unlock(&philo_data->data.log);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo_data->data.log);
+		// pthread_mutex_unlock(&philo_data->data.log);
 	}
 }
 
