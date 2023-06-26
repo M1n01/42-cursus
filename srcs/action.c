@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 12:12:35 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/26 13:58:48 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	sleeping(t_philo *philo_data)
 
 void	thinking(t_philo *philo_data)
 {
+	// フォークが空くまでthinkする
 	pthread_mutex_lock(&philo_data->data.log);
 	print_time_diff(philo_data->data.start_time);
 	printf("%d is thinking\n", philo_data->id + 1);
