@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/25 17:53:54 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/25 20:52:41 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->data.num_of_times_each_philo_must_eat)
 		{
-			thinking(philo_data);
 			take_forks(philo_data);
 			eating(philo_data);
 			put_forks(philo_data);
 			sleeping(philo_data);
+			thinking(philo_data);
 			// フォークが空くまでthinkする
 		}
 	}
