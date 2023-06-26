@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 14:44:03 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/26 18:05:42 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->data.num_of_times_each_philo_must_eat)
 		{
+			pthread_mutex_lock(&philo_data->data.log);
+			if (philo_data->is_dead)
+			{
+				pthread_mutex_unlock(&philo_data->data.log);
+				return (NULL);
+			}
+			pthread_mutex_unlock(&philo_data->data.log);
 			take_forks(philo_data);
 			eating(philo_data);
 			put_forks(philo_data);
