@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/25 17:48:12 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/26 15:04:28 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_philo	*philo_data_init(t_data *data, int id)
 	philo_data->id = id;
 	philo_data->eat_count = 0;
 	philo_data->data = *data;
-	philo_data->last_eat_time = 0;
+	philo_data->last_eat_time = philo_data->data.start_time;
 	philo_data->is_dead = false;
 	return (philo_data);
 }

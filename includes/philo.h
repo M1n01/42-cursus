@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 12:13:00 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/26 14:44:21 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_philo
 }	t_philo;
 
 void		*philosopher(void *d);
+void		*monitor(void *d);
 
 t_data		*init_data(int argc, char *argv[]);
 t_philo		*philo_data_init(t_data *data, int id);
