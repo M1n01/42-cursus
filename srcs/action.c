@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/25 15:01:06 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/26 12:12:35 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	eating(t_philo *philo_data)
 	printf("%d is eating\n", philo_data->id + 1);
 	philo_data->eat_count++;
 	pthread_mutex_unlock(&philo_data->data.log);
-	usleep(philo_data->data.time_to_eat * 1000);
+	my_usleep(philo_data->data.time_to_eat * 1000);
 	philo_data->last_eat_time = get_time_diff(philo_data->data.start_time);
 }
 
@@ -47,7 +47,7 @@ void	sleeping(t_philo *philo_data)
 	print_time_diff(philo_data->data.start_time);
 	printf("%d is sleeping\n", philo_data->id + 1);
 	pthread_mutex_unlock(&philo_data->data.log);
-	usleep(philo_data->data.time_to_sleep * 1000);
+	my_usleep(philo_data->data.time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo_data)

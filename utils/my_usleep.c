@@ -1,39 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   my_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 18:35:19 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 12:24:15 by minabe           ###   ########.fr       */
+/*   Created: 2023/06/26 12:08:24 by minabe            #+#    #+#             */
+/*   Updated: 2023/06/26 12:13:58 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-long long	get_time(void)
+void	my_usleep(long long action_time)
 {
-	struct timeval	tv;
-	long long		time;
+	long long	start;
 
-	gettimeofday(&tv, NULL);
-	time = tv.tv_usec;
-	// time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
-	return (time);
-}
-
-long long	get_time_diff(long long time)
-{
-	long long	diff;
-
-	diff = get_time() - time;
-	return (diff);
-}
-
-void	print_time_diff(long long time)
-{
-	printf("%lld ", get_time());
-	(void)time;
-	// printf("%lld ", get_time_diff(time));
+	start = get_time();
+	while (get_time_diff(start) < action_time)
+		usleep(100);
 }
