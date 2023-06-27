@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:11:55 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:19:32 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
 		{
-			take_forks(philo_data);
 			eating(philo_data);
-			put_forks(philo_data);
 			sleeping(philo_data);
 			thinking(philo_data);
 		}
@@ -82,7 +80,7 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	free(philo_data);
-	destroy_data(shered);
+	destroy_shered_data(shered);
 	// system("leaks -q philo");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:11:30 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:19:40 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef struct s_shered
 	long long		start_time;
 	bool			is_stop;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	log; // mutexに変更する
+	pthread_mutex_t	mutex;
+	pthread_mutex_t	log;
 }	t_shered;
 
 typedef struct s_philo
@@ -49,7 +50,7 @@ void		*monitor(void *d);
 
 t_shered	*init_shered_data(int argc, char *argv[]);
 t_philo		*init_philo_data(t_shered *shered, int id);
-void		destroy_data(t_shered *shered);
+void		destroy_shered_data(t_shered *shered);
 
 void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:11:03 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:19:23 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_shered	*init_shered_data(int argc, char *argv[])
 		i++;
 	}
 	shered->start_time = get_time();
+	pthread_mutex_init(&shered->mutex, NULL);
 	pthread_mutex_init(&shered->log, NULL);
 	return (shered);
 }
@@ -61,7 +62,7 @@ t_philo	*init_philo_data(t_shered *shered, int id)
 	return (philo_data);
 }
 
-void	destroy_data(t_shered *shered)
+void	destroy_shered_data(t_shered *shered)
 {
 	int	i;
 
@@ -72,6 +73,7 @@ void	destroy_data(t_shered *shered)
 		i++;
 	}
 	free(shered->forks);
+	pthread_mutex_destroy(&shered->mutex);
 	pthread_mutex_destroy(&shered->log);
 	free(shered);
 }
