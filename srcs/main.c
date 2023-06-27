@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:19:32 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:27:35 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
 		{
+			printf("philo[%d] ate last at %lld[ms]\n", philo_data->id + 1, (philo_data->last_eat_time - philo_data->shered.start_time) / 1000);
 			eating(philo_data);
 			sleeping(philo_data);
 			thinking(philo_data);
