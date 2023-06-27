@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:00:21 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:11:30 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_philo
 void		*philosopher(void *d);
 void		*monitor(void *d);
 
-t_shered		*init_data(int argc, char *argv[]);
-t_philo		*philo_data_init(t_shered *shered, int id);
+t_shered	*init_shered_data(int argc, char *argv[]);
+t_philo		*init_philo_data(t_shered *shered, int id);
 void		destroy_data(t_shered *shered);
 
 void		eating(t_philo *philo_data);

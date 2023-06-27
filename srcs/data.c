@@ -6,13 +6,13 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 11:53:34 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:11:03 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-t_shered	*init_data(int argc, char *argv[])
+t_shered	*init_shered_data(int argc, char *argv[])
 {
 	int		i;
 	t_shered	*shered;
@@ -46,7 +46,7 @@ t_shered	*init_data(int argc, char *argv[])
 	return (shered);
 }
 
-t_philo	*philo_data_init(t_shered *shered, int id)
+t_philo	*init_philo_data(t_shered *shered, int id)
 {
 	t_philo	*philo_data;
 

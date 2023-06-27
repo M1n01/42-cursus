@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 11:56:14 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:11:55 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
 		{
-			printf("philo[%d]: eat_count: %d\n", philo_data->id, philo_data->eat_count);
 			take_forks(philo_data);
 			eating(philo_data);
 			put_forks(philo_data);
@@ -56,7 +55,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
-	shered = init_data(argc, argv);
+	shered = init_shered_data(argc, argv);
 	if (shered == NULL)
 		return (EXIT_FAILURE);
 	philos = malloc(sizeof(pthread_t) * shered->num_philos);
@@ -68,7 +67,7 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < shered->num_philos)
 	{
-		philo_data[i] = philo_data_init(shered, i);
+		philo_data[i] = init_philo_data(shered, i);
 		if (philo_data == NULL)
 			return (EXIT_FAILURE);
 		if (pthread_create(&philos[i], NULL, philosopher, philo_data[i]) != 0)
