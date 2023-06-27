@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/28 00:39:22 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/28 00:57:01 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	*philosopher(void *d)
 {
 	t_philo		*philo_data;
-	// pthread_t	tid;
+	pthread_t	tid;
 
 	philo_data = (t_philo *)d;
-	// pthread_create(&tid, NULL, monitor, philo_data);
-	// pthread_detach(tid);
+	pthread_create(&tid, NULL, monitor, philo_data);
+	pthread_detach(tid);
 	if (philo_data->shered.num_of_times_each_philo_must_eat == NOT_SET)
 	{
 		// while (true)

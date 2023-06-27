@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 11:56:46 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/28 01:04:35 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,13 @@ void	*monitor(void *d)
 	philo_data = (t_philo *)d;
 	while (true)
 	{
-		pthread_mutex_lock(&philo_data->shered.log);
 		if (check_dead(philo_data))
 		{
-			print_time_diff(philo_data->shered.start_time);
-			printf("%d died\n", philo_data->id + 1);
+			print_log(philo_data, "died");
+			pthread_mutex_lock(&philo_data->shered.log);
 			philo_data->is_dead = true;
 			pthread_mutex_unlock(&philo_data->shered.log);
 			return (NULL);
 		}
-		pthread_mutex_unlock(&philo_data->shered.log);
 	}
 }

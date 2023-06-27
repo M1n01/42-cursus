@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 14:49:20 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/28 00:58:13 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ void	eating(t_philo *philo_data)
 	take_forks(philo_data);
 	print_log(philo_data, "is eating");
 	my_usleep(philo_data->shered.time_to_eat * 1000);
-	// pthread_mutex_lock(&philo_data->shered.mutex);
-	philo_data->eat_count++;
-	// pthread_mutex_unlock(&philo_data->shered.mutex);
 	pthread_mutex_lock(&philo_data->shered.mutex);
+	philo_data->eat_count++;
 	philo_data->last_eat_time = get_time();
 	pthread_mutex_unlock(&philo_data->shered.mutex);
 	put_forks(philo_data);
