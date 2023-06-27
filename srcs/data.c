@@ -6,47 +6,47 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 15:04:28 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 11:53:34 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-t_data	*init_data(int argc, char *argv[])
+t_shered	*init_data(int argc, char *argv[])
 {
 	int		i;
-	t_data	*data;
+	t_shered	*shered;
 
-	data = malloc(sizeof(t_data));
-	if (data == NULL)
+	shered = malloc(sizeof(t_shered));
+	if (shered == NULL)
 		return (NULL);
-	data->num_philos = my_atoi(argv[1]);
-	data->time_to_die = my_atoi(argv[2]);
-	data->time_to_eat = my_atoi(argv[3]);
-	data->time_to_sleep = my_atoi(argv[4]);
-	if (data->num_philos < 2 || data->time_to_die < 0 || data->time_to_eat < 0
-		|| data->time_to_sleep < 0)
+	shered->num_philos = my_atoi(argv[1]);
+	shered->time_to_die = my_atoi(argv[2]);
+	shered->time_to_eat = my_atoi(argv[3]);
+	shered->time_to_sleep = my_atoi(argv[4]);
+	if (shered->num_philos < 2 || shered->time_to_die < 0 || shered->time_to_eat < 0
+		|| shered->time_to_sleep < 0)
 		return (NULL);
 	if (argc == 6)
-		data->num_of_times_each_philo_must_eat = atoi(argv[5]);
+		shered->num_of_times_each_philo_must_eat = atoi(argv[5]);
 	else
-		data->num_of_times_each_philo_must_eat = NOT_SET;
-	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
-	if (data->forks == NULL)
+		shered->num_of_times_each_philo_must_eat = NOT_SET;
+	shered->forks = malloc(sizeof(pthread_mutex_t) * shered->num_philos);
+	if (shered->forks == NULL)
 		return (NULL);
 	i = 0;
-	while (i < data->num_philos)
+	while (i < shered->num_philos)
 	{
-		if (pthread_mutex_init(&data->forks[i], NULL) != 0)
+		if (pthread_mutex_init(&shered->forks[i], NULL) != 0)
 			return (NULL);
 		i++;
 	}
-	data->start_time = get_time();
-	pthread_mutex_init(&data->log, NULL);
-	return (data);
+	shered->start_time = get_time();
+	pthread_mutex_init(&shered->log, NULL);
+	return (shered);
 }
 
-t_philo	*philo_data_init(t_data *data, int id)
+t_philo	*philo_data_init(t_shered *shered, int id)
 {
 	t_philo	*philo_data;
 
@@ -55,23 +55,23 @@ t_philo	*philo_data_init(t_data *data, int id)
 		return (NULL);
 	philo_data->id = id;
 	philo_data->eat_count = 0;
-	philo_data->data = *data;
-	philo_data->last_eat_time = philo_data->data.start_time;
+	philo_data->shered = *shered;
+	philo_data->last_eat_time = philo_data->shered.start_time;
 	philo_data->is_dead = false;
 	return (philo_data);
 }
 
-void	destroy_data(t_data *data)
+void	destroy_data(t_shered *shered)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->num_philos)
+	while (i < shered->num_philos)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
+		pthread_mutex_destroy(&shered->forks[i]);
 		i++;
 	}
-	free(data->forks);
-	pthread_mutex_destroy(&data->log);
-	free(data);
+	free(shered->forks);
+	pthread_mutex_destroy(&shered->log);
+	free(shered);
 }

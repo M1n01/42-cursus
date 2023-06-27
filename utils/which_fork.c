@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:41:05 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/24 18:36:45 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 11:56:57 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	first(t_philo *philo_data)
 	int	left;
 
 	right = philo_data->id;
-	left = (philo_data->id + 1) % philo_data->data.num_philos;
+	left = (philo_data->id + 1) % philo_data->shered.num_philos;
 	if (philo_data->id % 2 == 0)
 		return (right);
 	else
@@ -31,7 +31,7 @@ int	second(t_philo *philo_data)
 	int	left;
 
 	right = philo_data->id;
-	left = (philo_data->id + 1) % philo_data->data.num_philos;
+	left = (philo_data->id + 1) % philo_data->shered.num_philos;
 	if (philo_data->id % 2 == 0)
 		return (left);
 	else

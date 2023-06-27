@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 18:05:42 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 11:56:14 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	*philosopher(void *d)
 {
 	t_philo		*philo_data;
-	pthread_t	tid;
+	// pthread_t	tid;
 
 	philo_data = (t_philo *)d;
-	pthread_create(&tid, NULL, monitor, philo_data);
-	pthread_detach(tid);
-	if (philo_data->data.num_of_times_each_philo_must_eat == NOT_SET)
+	// pthread_create(&tid, NULL, monitor, philo_data);
+	// pthread_detach(tid);
+	if (philo_data->shered.num_of_times_each_philo_must_eat == NOT_SET)
 	{
 		// while (true)
 		// {
@@ -34,15 +34,9 @@ void	*philosopher(void *d)
 	}
 	else
 	{
-		while (philo_data->eat_count < philo_data->data.num_of_times_each_philo_must_eat)
+		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
 		{
-			pthread_mutex_lock(&philo_data->data.log);
-			if (philo_data->is_dead)
-			{
-				pthread_mutex_unlock(&philo_data->data.log);
-				return (NULL);
-			}
-			pthread_mutex_unlock(&philo_data->data.log);
+			printf("philo[%d]: eat_count: %d\n", philo_data->id, philo_data->eat_count);
 			take_forks(philo_data);
 			eating(philo_data);
 			put_forks(philo_data);
@@ -56,25 +50,25 @@ void	*philosopher(void *d)
 int	main(int argc, char *argv[])
 {
 	int			i;
-	t_data		*data;
+	t_shered	*shered;
 	t_philo		**philo_data;
 	pthread_t	*philos;
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
-	data = init_data(argc, argv);
-	if (data == NULL)
+	shered = init_data(argc, argv);
+	if (shered == NULL)
 		return (EXIT_FAILURE);
-	philos = malloc(sizeof(pthread_t) * data->num_philos);
+	philos = malloc(sizeof(pthread_t) * shered->num_philos);
 	if (philos == NULL)
 		return (EXIT_FAILURE);
-	philo_data = malloc(sizeof(t_philo *) * data->num_philos);
+	philo_data = malloc(sizeof(t_philo *) * shered->num_philos);
 	if (philo_data == NULL)
 		return (EXIT_FAILURE);
 	i = 0;
-	while (i < data->num_philos)
+	while (i < shered->num_philos)
 	{
-		philo_data[i] = philo_data_init(data, i);
+		philo_data[i] = philo_data_init(shered, i);
 		if (philo_data == NULL)
 			return (EXIT_FAILURE);
 		if (pthread_create(&philos[i], NULL, philosopher, philo_data[i]) != 0)
@@ -82,14 +76,14 @@ int	main(int argc, char *argv[])
 		i++;
 	}
 	i = 0;
-	while (i < data->num_philos)
+	while (i < shered->num_philos)
 	{
 		pthread_join(philos[i], NULL);
 		free(&philo_data[i]);
 		i++;
 	}
 	free(philo_data);
-	destroy_data(data);
+	destroy_data(shered);
 	// system("leaks -q philo");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/26 18:56:43 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 12:00:21 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 
 # define NOT_SET -1
 
-// sheredのほうがわかりやすいかも。
-typedef struct s_data
+typedef struct s_shered
 {
 	int				num_philos;
 	int				time_to_die;
@@ -34,7 +33,7 @@ typedef struct s_data
 	bool			is_stop;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	log; // mutexに変更する
-}	t_data;
+}	t_shered;
 
 typedef struct s_philo
 {
@@ -42,15 +41,15 @@ typedef struct s_philo
 	int			eat_count;
 	long long	last_eat_time;
 	bool		is_dead;
-	t_data		data;
+	t_shered	shered;
 }	t_philo;
 
 void		*philosopher(void *d);
 void		*monitor(void *d);
 
-t_data		*init_data(int argc, char *argv[]);
-t_philo		*philo_data_init(t_data *data, int id);
-void		destroy_data(t_data *data);
+t_shered		*init_data(int argc, char *argv[]);
+t_philo		*philo_data_init(t_shered *shered, int id);
+void		destroy_data(t_shered *shered);
 
 void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);
