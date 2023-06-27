@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:19:40 by minabe           ###   ########.fr       */
+/*   Updated: 2023/06/27 13:53:57 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ long long	get_time_diff(long long time);
 void		print_time_diff(long long time);
 int			my_atoi(const char *str);
 void		my_usleep(long long action_time);
-void	print_log(t_philo *philo_data, char *str, pthread_mutex_t mutex);
-
+void	print_log(t_philo *philo_data, char *str);
 #endif
