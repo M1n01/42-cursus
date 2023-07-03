@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/27 12:19:23 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/03 09:45:53 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_shered	*init_shered_data(int argc, char *argv[])
 	shered->time_to_die = my_atoi(argv[2]);
 	shered->time_to_eat = my_atoi(argv[3]);
 	shered->time_to_sleep = my_atoi(argv[4]);
-	if (shered->num_philos < 2 || shered->time_to_die < 0 || shered->time_to_eat < 0
-		|| shered->time_to_sleep < 0)
+	if (shered->num_philos < 1 || shered->time_to_die < 0 || shered->time_to_eat < 0
+		|| shered->time_to_sleep < 0) // philoが1のとき確認
 		return (NULL);
 	if (argc == 6)
 		shered->num_of_times_each_philo_must_eat = atoi(argv[5]);

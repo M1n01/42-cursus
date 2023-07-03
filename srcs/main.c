@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/06/28 00:57:01 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/03 10:29:15 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 void	*philosopher(void *d)
 {
 	t_philo		*philo_data;
-	pthread_t	tid;
+	// pthread_t	tid;
 
 	philo_data = (t_philo *)d;
-	pthread_create(&tid, NULL, monitor, philo_data);
-	pthread_detach(tid);
+	// pthread_create(&tid, NULL, monitor, philo_data); // philosopherのdeathを監視するスレッド
+	// pthread_detach(tid);
+	// 誰かが死んだらその時点で終了する
 	if (philo_data->shered.num_of_times_each_philo_must_eat == NOT_SET)
 	{
 		// while (true)
@@ -36,9 +37,10 @@ void	*philosopher(void *d)
 	{
 		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
 		{
-			// pthread_mutex_lock(&philo_data->shered.log);
-			// printf("philo[%d] ate last at %lld[ms]\n", philo_data->id + 1, (philo_data->last_eat_time - philo_data->shered.start_time) / 1000);
-			// pthread_mutex_unlock(&philo_data->shered.log);
+			if (philo_data->shered.is_stop == true)
+			{
+				return ((void *)EXIT_FAILURE);
+			}
 			eating(philo_data);
 			sleeping(philo_data);
 			thinking(philo_data);
@@ -53,6 +55,7 @@ int	main(int argc, char *argv[])
 	t_shered	*shered;
 	t_philo		**philo_data;
 	pthread_t	*philos;
+	void		*status;
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
@@ -78,8 +81,18 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < shered->num_philos)
 	{
-		pthread_join(philos[i], NULL);
-		free(&philo_data[i]);
+		pthread_join(philos[i], &status); // philo_num == 1のときdetach処理
+		if (status != NULL)
+		{
+			print_log(philo_data[i], "died");
+			break ;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < shered->num_philos)
+	{
+		free(philo_data[i]);
 		i++;
 	}
 	free(philo_data);
