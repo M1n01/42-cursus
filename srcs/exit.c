@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/03 19:18:02 by minabe           ###   ########.fr       */
+/*   Created: 2023/07/03 17:01:09 by minabe            #+#    #+#             */
+/*   Updated: 2023/07/03 17:34:15 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int argc, char *argv[])
+void	philo_exit(t_philo **philo_data)
 {
+	int			i;
+	int			n;
 	t_shered	*shered;
-	t_philo		**philo_data;
 
-	if (argc != 5 && argc != 6)
-		return (EXIT_FAILURE);
-	shered = init_shered_data(argc, argv);
-	if (shered == NULL)
-		return (EXIT_FAILURE);
-	philo_data = malloc(sizeof(t_philo *) * shered->num_philos);
-	if (philo_data == NULL)
-		return (EXIT_FAILURE);
-	if (thread(philo_data, shered))
-		return (EXIT_FAILURE);
-	philo_exit(philo_data);
-	// system("leaks -q philo");
-	return (0);
+	i = 0;
+	n = philo_data[0]->shered.num_philos;
+	shered = &philo_data[0]->shered;
+	while (i < n)
+	{
+		free(&philo_data[i]);
+		i++;
+	}
+	free(philo_data);
+	destroy_shered_data(shered);
 }
