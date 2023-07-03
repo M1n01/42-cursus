@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/03 10:29:15 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/03 14:11:54 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	*philosopher(void *d)
 {
 	t_philo		*philo_data;
-	// pthread_t	tid;
+	pthread_t	tid;
 
 	philo_data = (t_philo *)d;
-	// pthread_create(&tid, NULL, monitor, philo_data); // philosopherのdeathを監視するスレッド
-	// pthread_detach(tid);
+	pthread_create(&tid, NULL, monitor, philo_data); // philosopherのdeathを監視するスレッド
+	pthread_detach(tid);
 	// 誰かが死んだらその時点で終了する
 	if (philo_data->shered.num_of_times_each_philo_must_eat == NOT_SET)
 	{
@@ -35,11 +35,16 @@ void	*philosopher(void *d)
 	}
 	else
 	{
-		while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
+		// while (philo_data->eat_count < philo_data->shered.num_of_times_each_philo_must_eat)
+		while (philo_data->shered.is_stop == false)
 		{
-			if (philo_data->shered.is_stop == true)
+			if (philo_data->eat_count == philo_data->shered.num_of_times_each_philo_must_eat)
 			{
-				return ((void *)EXIT_FAILURE);
+				print_log(philo_data, "died");
+				pthread_mutex_lock(&philo_data->shered.mutex);
+				philo_data->shered.is_stop = true;
+				pthread_mutex_unlock(&philo_data->shered.mutex);
+				break ;
 			}
 			eating(philo_data);
 			sleeping(philo_data);
@@ -55,7 +60,7 @@ int	main(int argc, char *argv[])
 	t_shered	*shered;
 	t_philo		**philo_data;
 	pthread_t	*philos;
-	void		*status;
+	// void		*status;
 
 	if (argc != 5 && argc != 6)
 		return (EXIT_FAILURE);
@@ -81,12 +86,13 @@ int	main(int argc, char *argv[])
 	i = 0;
 	while (i < shered->num_philos)
 	{
-		pthread_join(philos[i], &status); // philo_num == 1のときdetach処理
-		if (status != NULL)
-		{
-			print_log(philo_data[i], "died");
-			break ;
-		}
+		pthread_join(philos[i], NULL); // philo_num == 1のときdetach処理
+		// pthread_join(philos[i], &status); // philo_num == 1のときdetach処理
+		// if (status != NULL)
+		// {
+		// 	print_log(philo_data[i], "died");
+		// 	break ;
+		// }
 		i++;
 	}
 	i = 0;
