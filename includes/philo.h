@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/03 19:08:31 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/05 10:28:17 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,15 @@ typedef struct s_philo
 	bool		is_dead;
 }	t_philo;
 
-void		*philosopher(void *d);
 void		*monitor(void *d);
+int			thread(t_philo **philo_data, t_shered *shered);
 
 t_shered	*init_shered_data(int argc, char *argv[]);
 t_philo		*init_philo_data(t_shered *shered, int id);
 void		destroy_shered_data(t_shered *shered);
-void	philo_exit(t_philo **philo_data);
-int	thread(t_philo **philo_data, t_shered *shered);
+
+void		philo_exit(t_philo **philo_data);
+int			philo_error(t_philo **philo_data);
 
 void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);
@@ -67,5 +68,5 @@ long long	get_time_diff(long long time);
 void		print_time_diff(long long time);
 int			my_atoi(const char *str);
 void		my_usleep(long long action_time);
-int		print_log(t_philo *philo_data, char *str);
+int			print_log(t_philo *philo_data, char *str);
 #endif

@@ -6,31 +6,42 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/03 09:45:53 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/05 12:36:42 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+static int	input_args(t_shered *shered, int argc, char *argv[])
+{
+	shered->num_philos = my_atoi(argv[1]);
+	shered->time_to_die = my_atoi(argv[2]);
+	shered->time_to_eat = my_atoi(argv[3]);
+	shered->time_to_sleep = my_atoi(argv[4]);
+	if (shered->num_philos < 1 || shered->time_to_die < 0
+		|| shered->time_to_eat < 0 || shered->time_to_sleep < 0)
+		return (EXIT_FAILURE);
+	if (argc == 6)
+	{
+		shered->num_of_times_each_philo_must_eat = atoi(argv[5]);
+		if (shered->num_of_times_each_philo_must_eat < 1)
+			return (EXIT_FAILURE);
+	}
+	else
+		shered->num_of_times_each_philo_must_eat = NOT_SET;
+	return (EXIT_SUCCESS);
+}
+
 t_shered	*init_shered_data(int argc, char *argv[])
 {
-	int		i;
+	int			i;
 	t_shered	*shered;
 
 	shered = malloc(sizeof(t_shered));
 	if (shered == NULL)
 		return (NULL);
-	shered->num_philos = my_atoi(argv[1]);
-	shered->time_to_die = my_atoi(argv[2]);
-	shered->time_to_eat = my_atoi(argv[3]);
-	shered->time_to_sleep = my_atoi(argv[4]);
-	if (shered->num_philos < 1 || shered->time_to_die < 0 || shered->time_to_eat < 0
-		|| shered->time_to_sleep < 0) // philoが1のとき確認
+	if (input_args(shered, argc, argv) == EXIT_FAILURE)
 		return (NULL);
-	if (argc == 6)
-		shered->num_of_times_each_philo_must_eat = atoi(argv[5]);
-	else
-		shered->num_of_times_each_philo_must_eat = NOT_SET;
 	shered->forks = malloc(sizeof(pthread_mutex_t) * shered->num_philos);
 	if (shered->forks == NULL)
 		return (NULL);
