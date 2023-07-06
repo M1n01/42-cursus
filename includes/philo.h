@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/05 10:28:17 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/06 22:47:27 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 
 typedef struct s_shered
 {
-	int				num_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				num_of_times_each_philo_must_eat;
+	int				num_of_philos;
+	int				death_time;
+	int				eat_time;
+	int				sleep_time;
+	int				num_of_eat;
 	long long		start_time;
-	bool			is_stop;
+	bool			is_dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	mutex;
 	pthread_mutex_t	log;
@@ -38,22 +38,23 @@ typedef struct s_shered
 
 typedef struct s_philo
 {
+	t_shered	*shered;
 	int			id;
 	int			eat_count;
 	long long	last_eat_time;
-	t_shered	shered;
-	bool		is_dead;
+	bool		max_ate;
 }	t_philo;
 
-void		*monitor(void *d);
+// void		*monitor(void *d);
+void		*monitor(t_philo **philo_data, t_shered *shered);
 int			thread(t_philo **philo_data, t_shered *shered);
 
 t_shered	*init_shered_data(int argc, char *argv[]);
-t_philo		*init_philo_data(t_shered *shered, int id);
+t_philo		**init_philo_data(t_shered *shered);
 void		destroy_shered_data(t_shered *shered);
 
-void		philo_exit(t_philo **philo_data);
-int			philo_error(t_philo **philo_data);
+void		philo_exit(t_philo **philo_data, t_shered *shered);
+int			philo_error(t_philo **philo_data, t_shered *shered);
 
 void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/05 09:11:58 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/06 22:46:24 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	shered = init_shered_data(argc, argv);
 	if (shered == NULL)
 		return (EXIT_FAILURE);
-	philo_data = malloc(sizeof(t_philo *) * shered->num_philos);
+	philo_data = init_philo_data(shered);
 	if (philo_data == NULL)
 	{
 		destroy_shered_data(shered);
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	}
 	if (thread(philo_data, shered))
 		return (EXIT_FAILURE);
-	philo_exit(philo_data);
+	philo_exit(philo_data, shered);
 	// system("leaks -q philo");
 	return (0);
 }
