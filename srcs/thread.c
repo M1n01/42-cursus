@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/06 23:17:06 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 00:43:49 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,29 @@
 static void	*philo_routine(void *arg)
 {
 	t_philo		*philo;
+	pthread_t	tid;
 
 	philo = (t_philo *)arg;
-	// pthread_t	tid;
-	// pthread_create(&tid, NULL, monitor, philo);
-	// pthread_detach(tid);
+	pthread_create(&tid, NULL, monitor, philo);
+	pthread_detach(tid);
 	if (philo->shered->num_of_eat == NOT_SET)
 	{
-		printf("4つ目の引数を入れてください\n");
-	}
-	else
-	{
-		while (philo->eat_count < philo->shered->num_of_eat && philo->shered->is_dead == false)
+		while (philo->shered->is_dead == false)
 		{
 			eating(philo);
 			sleeping(philo);
 			thinking(philo);
 		}
 	}
-	if (philo->shered->is_dead)
-		printf("%d end!!\n", philo->id + 1);
+	else
+	{
+		while (philo->eat_count < philo->shered->num_of_eat && !philo->shered->is_dead)
+		{
+			eating(philo);
+			sleeping(philo);
+			thinking(philo);
+		}
+	}
 	return (NULL);
 }
 
@@ -68,7 +71,7 @@ static int	start_dinner(t_shered *shered, pthread_t *philosopher)
 
 	if (shered->num_of_philos == 1)
 	{
-		if (pthread_detach(philosopher[0]))
+		if (pthread_detach(philosopher[0])) // できていない
 			return (EXIT_FAILURE);
 	}
 	else

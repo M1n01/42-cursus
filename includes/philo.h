@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/06 22:47:27 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/06 23:48:31 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ typedef struct s_philo
 	bool		max_ate;
 }	t_philo;
 
-// void		*monitor(void *d);
-void		*monitor(t_philo **philo_data, t_shered *shered);
+void		*monitor(void *arg);
 int			thread(t_philo **philo_data, t_shered *shered);
 
 t_shered	*init_shered_data(int argc, char *argv[]);
