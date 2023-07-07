@@ -6,24 +6,30 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/06 22:47:50 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 22:53:24 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	take_forks(t_philo *philo_data)
+static void	take_forks(t_philo *philo_data)
 {
 	pthread_mutex_lock(&philo_data->shered->forks[first(philo_data)]);
 	print_log(philo_data, "has taken a fork");
 	pthread_mutex_lock(&philo_data->shered->forks[second(philo_data)]);
 	print_log(philo_data, "has taken a fork");
+	pthread_mutex_lock(&philo_data->shered->mutex);
+	philo_data->is_eating = true;
+	pthread_mutex_unlock(&philo_data->shered->mutex);
 }
 
-void	put_forks(t_philo *philo_data)
+static void	put_forks(t_philo *philo_data)
 {
 	pthread_mutex_unlock(&philo_data->shered->forks[first(philo_data)]);
 	pthread_mutex_unlock(&philo_data->shered->forks[second(philo_data)]);
+	pthread_mutex_lock(&philo_data->shered->mutex);
+	philo_data->is_eating = false;
+	pthread_mutex_unlock(&philo_data->shered->mutex);
 }
 
 void	eating(t_philo *philo_data)

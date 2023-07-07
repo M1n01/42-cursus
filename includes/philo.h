@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/06 23:48:31 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 21:54:08 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_philo
 	int			id;
 	int			eat_count;
 	long long	last_eat_time;
-	bool		max_ate;
+	bool		is_eating;
 }	t_philo;
 
 void		*monitor(void *arg);
@@ -57,8 +57,6 @@ int			philo_error(t_philo **philo_data, t_shered *shered);
 
 void		eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);
-void		take_forks(t_philo *philo_data);
-void		put_forks(t_philo *philo_data);
 void		thinking(t_philo *philo_data);
 
 int			first(t_philo *philo_data);

@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/07 00:15:05 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 13:29:42 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_philo	**init_philo_data(t_shered *shered_data)
 		philo_data[i]->id = i;
 		philo_data[i]->eat_count = 0;
 		philo_data[i]->last_eat_time = shered_data->start_time;
-		philo_data[i]->max_ate = false;
+		// philo_data[i]->is_eating = false;
 		i++;
 	}
 	return (philo_data);

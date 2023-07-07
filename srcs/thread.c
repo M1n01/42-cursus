@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/07 00:43:49 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 22:49:57 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,39 @@ static void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_create(&tid, NULL, monitor, philo);
 	pthread_detach(tid);
-	if (philo->shered->num_of_eat == NOT_SET)
+	pthread_mutex_lock(&philo->shered->mutex);
+	while (philo->shered->is_dead == false)
 	{
-		while (philo->shered->is_dead == false)
-		{
-			eating(philo);
-			sleeping(philo);
-			thinking(philo);
-		}
+		pthread_mutex_unlock(&philo->shered->mutex);
+		if (philo->shered->num_of_eat != NOT_SET
+			&& philo->eat_count >= philo->shered->num_of_eat)
+			break ;
+		eating(philo);
+		sleeping(philo);
+		thinking(philo);
+		pthread_mutex_lock(&philo->shered->mutex);
 	}
-	else
-	{
-		while (philo->eat_count < philo->shered->num_of_eat && !philo->shered->is_dead)
-		{
-			eating(philo);
-			sleeping(philo);
-			thinking(philo);
-		}
-	}
+	pthread_mutex_unlock(&philo->shered->mutex);
 	return (NULL);
 }
 
-static int	take_their_seat(t_philo **philo_data, t_shered *shered, pthread_t *philo)
+static int	take_their_seat(t_philo **data, t_shered *shered, pthread_t *philo)
 {
 	int	i;
 
 	i = 0;
 	while (i < shered->num_of_philos)
 	{
-		if (philo_data[i] == NULL)
+		if (data[i] == NULL)
 		{
 			free(philo);
-			philo_exit(philo_data, shered);
+			philo_exit(data, shered);
 			return (EXIT_FAILURE);
 		}
-		if (pthread_create(&philo[i], NULL, philo_routine, philo_data[i]))
+		if (pthread_create(&philo[i], NULL, philo_routine, data[i]))
 		{
 			free(philo);
-			philo_exit(philo_data, shered);
+			philo_exit(data, shered);
 			return (EXIT_FAILURE);
 		}
 		i++;
@@ -98,8 +93,6 @@ int	thread(t_philo **philo_data, t_shered *shered)
 		return (EXIT_FAILURE);
 	if (start_dinner(shered, philosopher) == EXIT_FAILURE)
 	{
-		if (shered->is_dead == true)
-			printf("hello\n");
 		philo_error(philo_data, shered);
 		return (EXIT_FAILURE);
 	}

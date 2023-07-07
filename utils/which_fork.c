@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:41:05 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/06 22:48:09 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/07 22:59:29 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,20 @@ int	first(t_philo *philo_data)
 
 	right = philo_data->id;
 	left = (philo_data->id + 1) % philo_data->shered->num_of_philos;
-	if (philo_data->id % 2 == 0)
-		return (right);
+	if (philo_data->id % 2 == 1)
+	{
+		if (philo_data->shered->num_of_philos % 2 == 1)
+			return (right);
+		else
+			return (left);
+	}
 	else
-		return (left);
+	{
+		if (philo_data->shered->num_of_philos % 2 == 1)
+			return (left);
+		else
+			return (right);
+	}
 }
 
 int	second(t_philo *philo_data)
@@ -32,8 +42,19 @@ int	second(t_philo *philo_data)
 
 	right = philo_data->id;
 	left = (philo_data->id + 1) % philo_data->shered->num_of_philos;
-	if (philo_data->id % 2 == 0)
-		return (left);
+		// left = philo_data->id;
+	if (philo_data->id % 2 == 1)
+	{
+		if (philo_data->shered->num_of_philos % 2 == 1)
+			return (left);
+		else
+			return (right);
+	}
 	else
-		return (right);
+	{
+		if (philo_data->shered->num_of_philos % 2 == 1)
+			return (right);
+		else
+			return (left);
+	}
 }
