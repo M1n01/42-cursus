@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/07 22:51:45 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 07:23:08 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static bool	check_dead(t_philo *philo)
 	time = (get_time() - philo->last_eat_time) / 1000;
 	pthread_mutex_unlock(&philo->shered->mutex);
 	pthread_mutex_lock(&philo->shered->mutex);
-	// if (philo->shered->death_time < time)
 	if (philo->is_eating == false && philo->shered->death_time < time)
 	{
 		pthread_mutex_unlock(&philo->shered->mutex);
@@ -36,7 +35,8 @@ void	*monitor(void *arg)
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->shered->mutex);
-	while (philo->shered->is_dead == false)
+	while (philo->shered->is_dead == false
+		&& philo->shered->num_of_eat > philo->eat_count)
 	{
 		pthread_mutex_unlock(&philo->shered->mutex);
 		if (check_dead(philo))
