@@ -5,23 +5,28 @@ CFLAGS = -Wall -Wextra -Werror -pthread $(addprefix -I,$(INCDIR))
 # CFLAGS += -g -fsanitize=thread
 
 INCDIR = ./includes
-INC = $(shell find $(INCDIR) -name "*.h" -type f | xargs)
+INC	=	$(INCDIR)/philo.h
 
 SRCDIR = ./srcs
-SRCS = $(shell find $(SRCDIR) -name "*.c" -type f | xargs)
+SRCS	=	$(SRCDIR)/actions.c \
+			$(SRCDIR)/data.c \
+			$(SRCDIR)/error.c \
+			$(SRCDIR)/exit.c \
+			$(SRCDIR)/log.c \
+			$(SRCDIR)/monitor.c \
+			$(SRCDIR)/philosophers.c \
+			$(SRCDIR)/thread.c \
+			$(SRCDIR)/time.c \
+			$(SRCDIR)/utils.c
 OBJS = $(SRCS:%.c=%.o)
-
-UTILSDIR = ./utils
-UTILS = $(shell find $(UTILSDIR) -name "*.c" -type f | xargs)
-U_OBJS = $(UTILS:%.c=%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(U_OBJS)
-		$(CC) $(CFLAGS) $(SRCS) $(U_OBJS) -o $(NAME)
+$(NAME): $(OBJS)
+		$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 clean:
-		$(RM) $(OBJS) $(U_OBJS) $(B_OBJS)
+		$(RM) $(OBJS)
 
 fclean: clean
 		$(RM) $(NAME)
