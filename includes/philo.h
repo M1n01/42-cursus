@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/07 21:54:08 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 20:32:06 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		destroy_shered_data(t_shered *shered);
 void		philo_exit(t_philo **philo_data, t_shered *shered);
 int			philo_error(t_philo **philo_data, t_shered *shered);
 
-void		eating(t_philo *philo_data);
+int			eating(t_philo *philo_data);
 void		sleeping(t_philo *philo_data);
 void		thinking(t_philo *philo_data);
 

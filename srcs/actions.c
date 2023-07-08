@@ -6,18 +6,21 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 19:36:13 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 21:33:34 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	take_forks(t_philo *philo_data)
+static int	take_forks(t_philo *philo_data)
 {
 	pthread_mutex_lock(&philo_data->shered->forks[first(philo_data)]);
 	print_log(philo_data, "has taken a fork");
+	if (first(philo_data) == second(philo_data))
+		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo_data->shered->forks[second(philo_data)]);
 	print_log(philo_data, "has taken a fork");
+	return (EXIT_SUCCESS);
 }
 
 static void	put_forks(t_philo *philo_data)
@@ -29,9 +32,10 @@ static void	put_forks(t_philo *philo_data)
 	pthread_mutex_unlock(&philo_data->shered->mutex);
 }
 
-void	eating(t_philo *philo_data)
+int	eating(t_philo *philo_data)
 {
-	take_forks(philo_data);
+	if (take_forks(philo_data))
+		return (EXIT_FAILURE);
 	pthread_mutex_lock(&philo_data->shered->mutex);
 	philo_data->is_eating = true;
 	philo_data->eat_count++;
@@ -40,6 +44,7 @@ void	eating(t_philo *philo_data)
 	print_log(philo_data, "is eating");
 	my_usleep(philo_data->shered->eat_time * 1000);
 	put_forks(philo_data);
+	return (EXIT_SUCCESS);
 }
 
 void	sleeping(t_philo *philo_data)
