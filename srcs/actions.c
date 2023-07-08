@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 16:39:08 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 17:05:35 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ static void	take_forks(t_philo *philo_data)
 		my_usleep(philo_data->shered->death_time * 10000);
 	pthread_mutex_lock(&philo_data->shered->forks[second(philo_data)]);
 	print_log(philo_data, "has taken a fork");
-	pthread_mutex_lock(&philo_data->shered->mutex);
-	philo_data->is_eating = true;
-	pthread_mutex_unlock(&philo_data->shered->mutex);
 }
 
 static void	put_forks(t_philo *philo_data)
@@ -39,12 +36,13 @@ static void	put_forks(t_philo *philo_data)
 void	eating(t_philo *philo_data)
 {
 	take_forks(philo_data);
-	print_log(philo_data, "is eating");
-	my_usleep(philo_data->shered->eat_time * 1000);
 	pthread_mutex_lock(&philo_data->shered->mutex);
+	philo_data->is_eating = true;
 	philo_data->eat_count++;
 	philo_data->last_eat_time = get_time();
 	pthread_mutex_unlock(&philo_data->shered->mutex);
+	print_log(philo_data, "is eating");
+	my_usleep(philo_data->shered->eat_time * 1000);
 	put_forks(philo_data);
 }
 
