@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 22:00:04 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 22:31:46 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ static void	*philo_routine(void *arg)
 	philo = (t_philo *)arg;
 	pthread_create(&tid, NULL, monitor, philo);
 	pthread_detach(tid);
-	// pthread_mutex_lock(&philo->shered->mutex);
+	pthread_mutex_lock(&philo->shered->mutex);
 	while (philo->shered->is_dead == false)
 	{
-		// pthread_mutex_unlock(&philo->shered->mutex);
+		pthread_mutex_unlock(&philo->shered->mutex);
 		if (philo->shered->num_of_eat != NOT_SET
 			&& philo->eat_count >= philo->shered->num_of_eat)
-			break ;
+			return (NULL);
 		if (eating(philo))
 			return (NULL);
 		sleeping(philo);
 		thinking(philo);
-		// pthread_mutex_lock(&philo->shered->mutex);
+		pthread_mutex_lock(&philo->shered->mutex);
 	}
-	// pthread_mutex_unlock(&philo->shered->mutex);
+	pthread_mutex_unlock(&philo->shered->mutex);
 	return (NULL);
 }
 
