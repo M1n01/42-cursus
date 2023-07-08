@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 22:51:23 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/09 04:35:21 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,27 @@ static bool	check_dead(t_philo *philo)
 
 void	*monitor(void *arg)
 {
-	t_philo	*philo;
+	t_philo		*philo;
+	t_shered	*data;
 
 	philo = (t_philo *)arg;
-	pthread_mutex_lock(&philo->shered->mutex);
-	while ((philo->shered->is_dead == false && philo->shered->num_of_eat != NOT_SET && philo->shered->num_of_eat > philo->eat_count)
-		|| (philo->shered->num_of_eat == NOT_SET && philo->shered->is_dead == false))
+	data = philo->shered;
+	pthread_mutex_lock(&data->mutex);
+	while (((data->num_of_eat >= 0 && data->num_of_eat > philo->eat_count)
+			|| data->num_of_eat == NOT_SET) && data->is_dead == false)
 	{
-		pthread_mutex_unlock(&philo->shered->mutex);
+		pthread_mutex_unlock(&data->mutex);
 		if (check_dead(philo))
 		{
 			print_log(philo, "died");
-			pthread_mutex_lock(&philo->shered->mutex);
-			philo->shered->is_dead = true;
-			pthread_mutex_unlock(&philo->shered->mutex);
+			pthread_mutex_lock(&data->mutex);
+			data->is_dead = true;
+			pthread_mutex_unlock(&data->mutex);
 		}
-		pthread_mutex_lock(&philo->shered->mutex);
-		if (philo->shered->num_of_philos == 1)
+		pthread_mutex_lock(&data->mutex);
+		if (data->num_of_philos == 1)
 			usleep(10);
 	}
-	pthread_mutex_unlock(&philo->shered->mutex);
+	pthread_mutex_unlock(&data->mutex);
 	return (NULL);
 }
