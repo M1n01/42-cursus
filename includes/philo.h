@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 20:32:06 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 23:35:37 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_shered
 	bool			is_dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	mutex;
-	pthread_mutex_t	log;
 }	t_shered;
 
 typedef struct s_philo
