@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 14:00:14 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 15:00:00 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	start_dinner(t_shered *shered, pthread_t *philosopher)
 
 	if (shered->num_of_philos == 1)
 	{
-		if (pthread_detach(philosopher[0])) // できていない
+		if (pthread_detach(philosopher[0]))
 			return (EXIT_FAILURE);
 	}
 	else
