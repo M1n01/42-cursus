@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 09:38:38 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/07 23:46:19 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/08 10:46:32 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static void	take_forks(t_philo *philo_data)
 {
-	if (philo_data->id % 2 == 1)
-		my_usleep(10);
+	// if (philo_data->id % 2 == 1)
+	// 	my_usleep(10);
 	pthread_mutex_lock(&philo_data->shered->forks[first(philo_data)]);
 	print_log(philo_data, "has taken a fork");
+	if (philo_data->shered->num_of_philos == 1)
+		my_usleep(philo_data->shered->death_time * 5000);
 	pthread_mutex_lock(&philo_data->shered->forks[second(philo_data)]);
 	print_log(philo_data, "has taken a fork");
 	pthread_mutex_lock(&philo_data->shered->mutex);
