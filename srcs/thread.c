@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 22:31:46 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 08:06:07 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,6 @@ static int	take_their_seat(t_philo **data, t_shered *shered, pthread_t *philo)
 	i = 0;
 	while (i < shered->num_of_philos)
 	{
-		if (data[i] == NULL)
-		{
-			free(philo);
-			philo_exit(data, shered);
-			return (EXIT_FAILURE);
-		}
 		if (pthread_create(&philo[i], NULL, philo_routine, data[i]))
 		{
 			free(philo);
