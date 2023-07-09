@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/09 04:35:21 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:11:04 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*monitor(void *arg)
 			print_log(philo, "died");
 			pthread_mutex_lock(&data->mutex);
 			data->is_dead = true;
-			pthread_mutex_unlock(&data->mutex);
+			// pthread_mutex_unlock(&data->mutex);
 		}
 		pthread_mutex_lock(&data->mutex);
 		if (data->num_of_philos == 1)
