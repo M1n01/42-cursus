@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/09 13:11:04 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/09 13:54:58 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	*monitor(void *arg)
 	philo = (t_philo *)arg;
 	data = philo->shered;
 	pthread_mutex_lock(&data->mutex);
-	while (((data->num_of_eat >= 0 && data->num_of_eat > philo->eat_count)
-			|| data->num_of_eat == NOT_SET) && data->is_dead == false)
+	while ((philo->shered->is_dead == false && philo->shered->num_of_eat != NOT_SET && philo->shered->num_of_eat > philo->eat_count)
+		|| (philo->shered->num_of_eat == NOT_SET && philo->shered->is_dead == false))
 	{
 		pthread_mutex_unlock(&data->mutex);
 		if (check_dead(philo))
