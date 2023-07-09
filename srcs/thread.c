@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 19:01:11 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 08:06:07 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 08:53:37 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ static void	*philo_routine(void *arg)
 			&& philo->eat_count >= philo->shered->num_of_eat)
 			return (NULL);
 		if (eating(philo))
+		{
+			usleep(1000000);
 			return (NULL);
+		}
 		sleeping(philo);
 		thinking(philo);
 		pthread_mutex_lock(&philo->shered->mutex);
