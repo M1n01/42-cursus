@@ -6,22 +6,11 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 08:06:35 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 08:35:20 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-// int	case_one(t_philo *philo)
-// {
-// 	pthread_t	*philosopher;
-
-// 	philosopher = malloc(sizeof(pthread_t) * shered->num_of_philos);
-// 	if (philosopher == NULL)
-// 		return (EXIT_FAILURE);
-	
-// 	return (EXIT_SUCCESS);
-// }
 
 int	main(int argc, char *argv[])
 {
@@ -39,9 +28,7 @@ int	main(int argc, char *argv[])
 		destroy_shered_data(shered);
 		return (EXIT_FAILURE);
 	}
-	// if (shered->num_of_philos == 1)
-	// 	return (case_one(philo_data));
-	if (thread(philo_data, shered)) // else if
+	if (thread(philo_data, shered))
 		return (EXIT_FAILURE);
 	philo_exit(philo_data, shered);
 	return (0);
