@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:01:09 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 09:50:27 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 09:52:16 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	philo_success(t_philo **philo_data, t_shered *shered)
 {
-	int	i;
-
-	i = 0;
 	pthread_mutex_lock(&shered->mutex);
 	while (shered->monitor_end != shered->num_of_philos)
 	{
