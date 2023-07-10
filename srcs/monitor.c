@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 14:25:36 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 08:41:08 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 08:57:02 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	*monitor(void *arg)
 			pthread_mutex_unlock(&data->mutex);
 		}
 		pthread_mutex_lock(&data->mutex);
-		if (data->num_of_philos == 1)
-			usleep(10);
 	}
 	pthread_mutex_unlock(&data->mutex);
 	return (NULL);
