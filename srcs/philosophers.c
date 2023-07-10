@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:28:29 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 09:23:35 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 09:49:54 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	main(int argc, char *argv[])
 	}
 	if (thread(philo_data, shered))
 		return (EXIT_FAILURE);
-	philo_exit(philo_data, shered);
+	philo_success(philo_data, shered);
 	return (0);
 }
