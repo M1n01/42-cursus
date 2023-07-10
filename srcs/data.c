@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 16:20:57 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/08 23:35:56 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 09:27:46 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_shered	*init_shered_data(int argc, char *argv[])
 		i++;
 	}
 	shered->start_time = get_time();
+	shered->monitor_end = 0;
 	pthread_mutex_init(&shered->mutex, NULL);
 	return (shered);
 }
