@@ -6,7 +6,7 @@
 /*   By: minabe <minabe@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 17:22:47 by minabe            #+#    #+#             */
-/*   Updated: 2023/07/10 09:50:14 by minabe           ###   ########.fr       */
+/*   Updated: 2023/07/10 12:15:30 by minabe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_shered
 	long long		start_time;
 	bool			is_dead;
 	int				monitor_end;
+	int				finished;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	mutex;
 }	t_shered;
