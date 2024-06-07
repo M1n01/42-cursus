@@ -1,0 +1,13 @@
+*.a
+a.out*
+main.c
+.vscode
+.DS_Store
+*.o
+test.sh
+test.c
+gnlTester
+gnl-tester*
+*.txt
+Makefile
+*bonus.*
