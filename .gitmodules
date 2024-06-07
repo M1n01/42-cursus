@@ -1,0 +1,9 @@
+[submodule "4-cub3d"]
+	path = 4-cub3d
+	url = git@github.com:M1n01/cub3d.git
+[submodule "3-minishell"]
+	path = 3-minishell
+	url = git@github.com:M1n01/minishell.git
+[submodule "5-webserv"]
+	path = 5-webserv
+	url = git@github.com:yuidvg/webserv.git
