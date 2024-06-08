@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include "../include/libft.h"
 
 int	main(void)
 {

@@ -16,6 +16,9 @@
 # include <sys/types.h>
 # include <stdlib.h>
 # include <sysexits.h>
+# include <stdbool.h>
+# include "../../0-libft/libft.h"
+# include "../../1-printf/include/ft_printf.h"
 # define EOT 4
 
 typedef struct s_server

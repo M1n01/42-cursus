@@ -27,8 +27,10 @@ B_CLIENT_OBJ	=	$(B_CLIENT_SRC:%.c=%.o)
 INCDIR	=	./include
 INC		=	$(INCDIR)/minitalk.h
 
-LIBFTDIR = ./libft
+LIBFTDIR = ../0-libft
 LIBFT = $(LIBFTDIR)/libft.a
+PRINTFDIR = ../1-printf
+PRINTF = $(PRINTFDIR)/libftprintf.a
 
 ifdef WITH_BONUS
 	SERVER_SRC = $(B_SERVER_SRC)
@@ -42,25 +44,28 @@ $(NAME): $(SERVER) $(CLIENT)
 bonus:
 		$(MAKE) WITH_BONUS=1
 
-$(SERVER): $(SERVER_OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) -o $(SERVER) $(SERVER_OBJ) $(LIBFT)
+$(SERVER): $(SERVER_OBJ) $(LIBFT) $(PRINTF)
+		$(CC) $(CFLAGS) -o $(SERVER) $(SERVER_OBJ) $(LIBFT) $(PRINTF)
 
-$(CLIENT): $(CLIENT_OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) -o $(CLIENT) $(CLIENT_OBJ) $(LIBFT)
+$(CLIENT): $(CLIENT_OBJ) $(LIBFT) $(PRINTF)
+		$(CC) $(CFLAGS) -o $(CLIENT) $(CLIENT_OBJ) $(LIBFT) $(PRINTF)
 
 $(LIBFT):
 		$(MAKE) -C $(LIBFTDIR)
 
+$(PRINTF):
+		$(MAKE) -C $(PRINTFDIR)
+
 clean:
-		$(MAKE) fclean -C $(LIBFTDIR)
+		$(MAKE) fclean -C $(LIBFTDIR) $(PRINTFDIR)
 		$(RM) $(SERVER_OBJ) $(CLIENT_OBJ) $(B_SERVER_OBJ) $(B_CLIENT_OBJ)
 
 fclean: clean
-		$(RM) $(SERVER) $(CLIENT)
+		$(RM) $(SERVER) $(CLIENT) $(LIBFT) $(PRINTF)
 
 re: fclean all
 
-debug: CFLAGS += -g
+debug: CFLAGS += -g -fsanitize=address,undefined
 debug: re
 
 .PHONY: all clean fclean re debug bonus

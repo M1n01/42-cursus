@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include "../include/libft.h"
 
 t_server	g_server;
 
