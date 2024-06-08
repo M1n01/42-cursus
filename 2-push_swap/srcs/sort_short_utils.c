@@ -10,25 +10,24 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	dfs(t_list *stack1, t_list *stack2, t_info *info, size_t turn)
+void dfs(t_node *stack1, t_node *stack2, t_info *info, size_t turn)
 {
-	int	command;
+	int command;
 
 	if (turn >= info->turn)
-		return ;
+		return;
 	if (stack_size(stack2) == 0 && is_sorted(stack1, ASC))
 		return (update_ans(info, turn));
 	command = -1;
 	while (++command < 11)
 	{
 		if (is_detour(command, info) || turn >= info->turn)
-			continue ;
+			continue;
 		if (!exec_cmd(stack1, stack2, command))
-			continue ;
+			continue;
 		info->pre = command;
 		info->tmp[turn] = command;
 		dfs(stack1, stack2, info, turn + 1);
@@ -36,7 +35,7 @@ void	dfs(t_list *stack1, t_list *stack2, t_info *info, size_t turn)
 	}
 }
 
-bool	is_detour(int cmd, t_info *info)
+bool is_detour(int cmd, t_info *info)
 {
 	if (cmd == PA && info->pre == PB)
 		return (true);
@@ -63,9 +62,9 @@ bool	is_detour(int cmd, t_info *info)
 	return (false);
 }
 
-void	update_ans(t_info *info, size_t turn)
+void update_ans(t_info *info, size_t turn)
 {
-	size_t	i;
+	size_t i;
 
 	if (info->ans != NULL)
 		ft_free(info->ans);
@@ -79,5 +78,5 @@ void	update_ans(t_info *info, size_t turn)
 		i++;
 	}
 	info->turn = turn;
-	return ;
+	return;
 }

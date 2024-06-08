@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-t_info	*init_info(void)
+t_info *init_info(void)
 {
-	size_t	i;
-	t_info	*info;
+	size_t i;
+	t_info *info;
 
 	info = malloc(sizeof(t_info));
 	if (!info)
@@ -37,9 +36,9 @@ t_info	*init_info(void)
 	return (info);
 }
 
-t_info	*init_info_long_ver(void)
+t_info *init_info_long_ver(void)
 {
-	t_info	*info;
+	t_info *info;
 
 	info = malloc(sizeof(t_info));
 	if (!info)
@@ -51,7 +50,7 @@ t_info	*init_info_long_ver(void)
 	return (info);
 }
 
-void	free_info(t_info *info)
+void free_info(t_info *info)
 {
 	ft_free(info->tmp);
 	ft_free(info->ans);

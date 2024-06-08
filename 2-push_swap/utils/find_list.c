@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-t_list	*find_tail(t_list	*stack)
+t_node *find_tail(t_node *stack)
 {
 	while (stack->next->ordinal != -1)
 		stack = stack->next;
 	return (stack);
 }
 
-t_list	*find_max(t_list *stack)
+t_node *find_max(t_node *stack)
 {
-	t_list	*max;
+	t_node *max;
 
 	max = stack->next;
 	while (stack->next->ordinal != -1)
@@ -35,7 +34,7 @@ t_list	*find_max(t_list *stack)
 	return (max);
 }
 
-t_list	*find_ordinal(t_list *stack, ssize_t value)
+t_node *find_ordinal(t_node *stack, ssize_t value)
 {
 	while (stack->next->ordinal != -1)
 	{

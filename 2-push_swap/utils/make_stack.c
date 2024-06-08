@@ -12,14 +12,14 @@
 
 #include "../include/push_swap.h"
 
-static void	lstadd_tail(t_list *stack, int value, ssize_t coodinate);
+static void	lstadd_tail(t_node *stack, int value, ssize_t coodinate);
 
-t_list	*make_stack1(int ac, char *av[])
+t_node	*make_stack1(int ac, char *av[])
 {
 	int		*array;
 	int		i;
 	ssize_t	*coordinate;
-	t_list	*stack;
+	t_node	*stack;
 
 	array = make_array(ac, av);
 	coordinate = compression(array, ac - 1);
@@ -35,12 +35,12 @@ t_list	*make_stack1(int ac, char *av[])
 	return (stack);
 }
 
-t_list	*init_stack(void)
+t_node	*init_stack(void)
 {
-	t_list	*head;
-	t_list	*stack;
+	t_node	*head;
+	t_node	*stack;
 
-	stack = malloc(sizeof(t_list));
+	stack = malloc(sizeof(t_node));
 	if (stack == NULL)
 		ft_error(stack);
 	head = stack;
@@ -51,15 +51,15 @@ t_list	*init_stack(void)
 	return (stack);
 }
 
-static void	lstadd_tail(t_list *stack, int value, ssize_t coodinate)
+static void	lstadd_tail(t_node *stack, int value, ssize_t coodinate)
 {
-	t_list	*head;
-	t_list	*tail;
-	t_list	*new;
+	t_node	*head;
+	t_node	*tail;
+	t_node	*new;
 
 	head = stack;
 	tail = find_tail(stack);
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_node));
 	if (new == NULL)
 		ft_error(new);
 	new->value = value;

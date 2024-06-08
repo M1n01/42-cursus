@@ -10,16 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	push_swap(t_list *stack1, t_list *stack2, size_t size);
+void	push_swap(t_node *stack1, t_node *stack2, size_t size);
 
 int	main(int ac, char *av[])
 {
-	t_list	*stack1;
-	t_list	*stack2;
+	t_node	*stack1;
+	t_node	*stack2;
 
 	stack1 = make_stack1(ac, av);
 	stack2 = init_stack();
@@ -29,7 +28,7 @@ int	main(int ac, char *av[])
 	return (0);
 }
 
-void	push_swap(t_list *stack1, t_list *stack2, size_t size)
+void	push_swap(t_node *stack1, t_node *stack2, size_t size)
 {
 	if (is_sorted(stack1, ASC))
 		return ;

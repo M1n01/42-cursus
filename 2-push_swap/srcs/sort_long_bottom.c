@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-static void	pb_seperate_bottom(t_list *stack1, t_list *stack2, t_info *info)
+static void	pb_seperate_bottom(t_node *stack1, t_node *stack2, t_info *info)
 {
 	size_t	size;
 	ssize_t	pivot;
@@ -30,7 +29,7 @@ static void	pb_seperate_bottom(t_list *stack1, t_list *stack2, t_info *info)
 	}
 }
 
-void	bottom_sort(t_list *stack1, t_list *stack2, t_info *info)
+void	bottom_sort(t_node *stack1, t_node *stack2, t_info *info)
 {
 	size_t	size;
 

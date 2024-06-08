@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-static void	sort(int *array, size_t size);
-static void	int_swap(int *big, int *small);
-static void	rank(int *array, int *array_cp, ssize_t *coordinate, size_t size);
+static void sort(int *array, size_t size);
+static void int_swap(int *big, int *small);
+static void rank(int *array, int *array_cp, ssize_t *coordinate, size_t size);
 
-int	*make_array(int ac, char *av[])
+int *make_array(int ac, char *av[])
 {
-	int	i;
-	int	*array;
+	int i;
+	int *array;
 
 	array = malloc(sizeof(int) * (ac - 1));
 	if (array == NULL)
@@ -35,11 +34,11 @@ int	*make_array(int ac, char *av[])
 	return (array);
 }
 
-ssize_t	*compression(int *array, size_t	size)
+ssize_t *compression(int *array, size_t size)
 {
-	size_t	i;
-	ssize_t	*coordinate;
-	int		*array_cp;
+	size_t i;
+	ssize_t *coordinate;
+	int *array_cp;
 
 	array_cp = malloc(sizeof(int) * (size));
 	if (array_cp == NULL)
@@ -59,10 +58,10 @@ ssize_t	*compression(int *array, size_t	size)
 	return (coordinate);
 }
 
-static void	sort(int *array, size_t size)
+static void sort(int *array, size_t size)
 {
-	size_t	i;
-	size_t	j;
+	size_t i;
+	size_t j;
 
 	i = 0;
 	while (i < size)
@@ -78,23 +77,23 @@ static void	sort(int *array, size_t size)
 		}
 		i++;
 	}
-	return ;
+	return;
 }
 
-static void	int_swap(int *big, int *small)
+static void int_swap(int *big, int *small)
 {
-	int	tmp;
+	int tmp;
 
 	tmp = *big;
 	*big = *small;
 	*small = tmp;
-	return ;
+	return;
 }
 
-static void	rank(int *array, int *array_cp, ssize_t *coordinate, size_t size)
+static void rank(int *array, int *array_cp, ssize_t *coordinate, size_t size)
 {
-	size_t	i;
-	size_t	j;
+	size_t i;
+	size_t j;
 
 	i = 0;
 	while (i < size)
@@ -108,5 +107,5 @@ static void	rank(int *array, int *array_cp, ssize_t *coordinate, size_t size)
 		}
 		i++;
 	}
-	return ;
+	return;
 }

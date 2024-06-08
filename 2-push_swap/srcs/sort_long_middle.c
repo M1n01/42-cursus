@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-static void	sep_into_three(t_list *s1, t_list *s2, t_info *info, size_t size)
+static void	sep_into_three(t_node *s1, t_node *s2, t_info *info, size_t size)
 {
 	ssize_t	max;
 	ssize_t	pivot1;
@@ -37,7 +36,7 @@ static void	sep_into_three(t_list *s1, t_list *s2, t_info *info, size_t size)
 	}
 }
 
-void	middle_sort(t_list *stack1, t_list *stack2, t_info *info, size_t size)
+void	middle_sort(t_node *stack1, t_node *stack2, t_info *info, size_t size)
 {
 	ssize_t	max;
 	ssize_t	pivot1;

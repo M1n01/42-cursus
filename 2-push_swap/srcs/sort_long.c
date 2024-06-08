@@ -10,31 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	classify_into_three(t_list *stack1, t_list *stack2, t_info *info)
+void classify_into_three(t_node *stack1, t_node *stack2, t_info *info)
 {
-	size_t	size;
+	size_t size;
 
 	size = stack_size(stack1);
 	while (stack_size(stack1) > size * 2 / 5)
 	{
-		if ((ssize_t)size / 5 <= stack1->next->ordinal && \
+		if ((ssize_t)size / 5 <= stack1->next->ordinal &&
 			stack1->next->ordinal < (ssize_t)size * 4 / 5)
 			pb_and_split_half(stack1, stack2, info, (ssize_t)size / 2);
 		else
 			record_command(stack1, stack2, info, RA);
 	}
-	return ;
+	return;
 }
 
-void	sort_long(t_list *stack1, t_list *stack2)
+void sort_long(t_node *stack1, t_node *stack2)
 {
-	t_info	*info;
-	size_t	size;
-	size_t	i;
+	t_info *info;
+	size_t size;
+	size_t i;
 
 	info = init_info_long_ver();
 	size = stack_size(stack1) * 3 / 10;
@@ -50,5 +49,5 @@ void	sort_long(t_list *stack1, t_list *stack2)
 	ans_optimize(info);
 	print_ans(info);
 	free_info(info);
-	return ;
+	return;
 }

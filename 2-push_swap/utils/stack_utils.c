@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-size_t	stack_size(t_list *stack)
+size_t stack_size(t_node *stack)
 {
-	size_t	len;
+	size_t len;
 
 	len = 0;
 	while (stack->next->ordinal != -1)
@@ -27,7 +26,7 @@ size_t	stack_size(t_list *stack)
 	return (len);
 }
 
-bool	is_sorted(t_list *stack, int order)
+bool is_sorted(t_node *stack, int order)
 {
 	while (stack->next->ordinal != -1)
 	{
@@ -40,10 +39,10 @@ bool	is_sorted(t_list *stack, int order)
 	return (true);
 }
 
-void	free_stack(t_list *stack)
+void free_stack(t_node *stack)
 {
-	t_list	*head;
-	t_list	*tmp;
+	t_node *head;
+	t_node *tmp;
 
 	head = stack;
 	stack = stack->next;

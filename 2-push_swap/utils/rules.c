@@ -10,46 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	swap(t_list *stack)
+void swap(t_node *stack)
 {
-	t_list	*src;
+	t_node *src;
 
 	src = stack->next;
 	lstcpy(src, src->next);
 	lstdelone_node(src);
-	return ;
+	return;
 }
 
-void	push(t_list *from, t_list *to)
+void push(t_node *from, t_node *to)
 {
-	t_list	*src;
+	t_node *src;
 
 	src = from->next;
 	lstcpy(src, to);
 	lstdelone_node(src);
-	return ;
+	return;
 }
 
-void	rotate(t_list *stack)
+void rotate(t_node *stack)
 {
-	t_list	*src;
+	t_node *src;
 
 	src = stack->next;
 	lstcpy(src, stack->prev);
 	lstdelone_node(src);
-	return ;
+	return;
 }
 
-void	rev_rotate(t_list *stack)
+void rev_rotate(t_node *stack)
 {
-	t_list	*src;
+	t_node *src;
 
 	src = stack->prev;
 	lstcpy(src, stack);
 	lstdelone_node(src);
-	return ;
+	return;
 }

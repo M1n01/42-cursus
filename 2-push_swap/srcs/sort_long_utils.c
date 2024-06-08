@@ -10,40 +10,39 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	find_max_and_pa(t_list *stack1, t_list *stack2, t_info *info)
+void find_max_and_pa(t_node *stack1, t_node *stack2, t_info *info)
 {
-	t_list	*max;
-	long	step;
+	t_node *max;
+	long step;
 
 	max = find_max(stack2);
 	if (max == NULL)
-		return ;
+		return;
 	step = cal_steps(stack2, max);
 	rotate_min_steps(stack2, step, 'B', info);
 	record_command(stack1, stack2, info, PA);
 }
 
-void	pb_and_split_half(t_list *s1, t_list *s2, t_info *info, ssize_t piv)
+void pb_and_split_half(t_node *s1, t_node *s2, t_info *info, ssize_t piv)
 {
 	record_command(s1, s2, info, PB);
 	if (s2->next->ordinal < piv)
 		record_command(s1, s2, info, RB);
 }
 
-void	pa_and_split_half(t_list *s1, t_list *s2, t_info *info, ssize_t piv)
+void pa_and_split_half(t_node *s1, t_node *s2, t_info *info, ssize_t piv)
 {
 	record_command(s1, s2, info, PA);
 	if (s1->next->ordinal < piv)
 		record_command(s1, s2, info, RA);
 }
 
-void	pile_up_blocks(t_list *s1, t_list *s2, t_info *info, size_t size)
+void pile_up_blocks(t_node *s1, t_node *s2, t_info *info, size_t size)
 {
-	size_t	push_size;
+	size_t push_size;
 
 	push_size = 0;
 	while (push_size < size)

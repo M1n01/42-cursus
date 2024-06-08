@@ -10,17 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	sort_short(t_list *stack1, t_list *stack2)
+void sort_short(t_node *stack1, t_node *stack2)
 {
-	t_info	*info;
+	t_info *info;
 
 	info = init_info();
 	dfs(stack1, stack2, info, 0);
 	print_ans(info);
 	free_info(info);
-	return ;
+	return;
 }

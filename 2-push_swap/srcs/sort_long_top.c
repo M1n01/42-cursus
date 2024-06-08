@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	top_sort(t_list *stack1, t_list *stack2, t_info *info)
+void	top_sort(t_node *stack1, t_node *stack2, t_info *info)
 {
 	size_t	size;
 	size_t	push_count;

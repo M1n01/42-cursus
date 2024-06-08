@@ -17,15 +17,15 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include "./libft.h"
+# include "../../0-libft/libft.h"
 
-typedef struct s_list
+typedef struct s_node
 {
 	int				value;
 	ssize_t			ordinal;
-	struct s_list	*next;
-	struct s_list	*prev;
-}					t_list;
+	struct s_node	*next;
+	struct s_node	*prev;
+}					t_node;
 
 typedef struct s_info
 {
@@ -50,49 +50,49 @@ typedef enum e_cmd
 	RRR,
 }				t_cmd;
 
-t_list	*make_stack1(int ac, char *av[]);
+t_node	*make_stack1(int ac, char *av[]);
 int		*make_array(int ac, char *av[]);
 ssize_t	*compression(int *array, size_t	size);
-t_list	*init_stack(void);
-t_list	*find_tail(t_list	*stack);
+t_node	*init_stack(void);
+t_node	*find_tail(t_node	*stack);
 
-void	swap(t_list *stack);
-void	push(t_list *from, t_list *to);
-void	rotate(t_list *stack);
-void	rev_rotate(t_list *stack);
+void	swap(t_node *stack);
+void	push(t_node *from, t_node *to);
+void	rotate(t_node *stack);
+void	rev_rotate(t_node *stack);
 
-t_list	*lstdelone_node(t_list *trash);
-void	lstcpy(t_list *src, t_list *dest);
-size_t	stack_size(t_list *stack);
+t_node	*lstdelone_node(t_node *trash);
+void	lstcpy(t_node *src, t_node *dest);
+size_t	stack_size(t_node *stack);
 
 void	print_command(int command);
-bool	is_sorted(t_list *stack, int order);
+bool	is_sorted(t_node *stack, int order);
 void	print_ans(t_info *info);
 int		ch_cmd(int command);
-bool	exec_cmd(t_list *stack1, t_list *stack2, int command);
+bool	exec_cmd(t_node *stack1, t_node *stack2, int command);
 bool	is_detour(int cmd, t_info *info);
 
 t_info	*init_info(void);
 t_info	*init_info_long_ver(void);
 void	free_info(t_info *cmd);
 
-long	cal_steps(t_list *stack, t_list *find);
-void	rotate_min_steps(t_list *stack, long step, char which, t_info *info);
+long	cal_steps(t_node *stack, t_node *find);
+void	rotate_min_steps(t_node *stack, long step, char which, t_info *info);
 
-t_list	*find_ordinal(t_list *stack, ssize_t value);
-t_list	*find_max(t_list *stack);
+t_node	*find_ordinal(t_node *stack, ssize_t value);
+t_node	*find_max(t_node *stack);
 
-void	command(t_list *stack1, t_list *stack2, int command);
+void	command(t_node *stack1, t_node *stack2, int command);
 int		*add_ans(t_info *info, int command);
-void	record_command(t_list *stack1, t_list *stack2, t_info *info, int cmd);
+void	record_command(t_node *stack1, t_node *stack2, t_info *info, int cmd);
 
-void	free_stack(t_list *stack);
+void	free_stack(t_node *stack);
 void	ans_optimize(t_info *info);
 
-void	find_max_and_pa(t_list *stack1, t_list *stack2, t_info *info);
+void	find_max_and_pa(t_node *stack1, t_node *stack2, t_info *info);
 
-void	pa_and_split_half(t_list *s1, t_list *s2, t_info *info, ssize_t piv);
-void	pb_and_split_half(t_list *s1, t_list *s2, t_info *info, ssize_t piv);
-void	pile_up_blocks(t_list *s1, t_list *s2, t_info *info, size_t size);
+void	pa_and_split_half(t_node *s1, t_node *s2, t_info *info, ssize_t piv);
+void	pb_and_split_half(t_node *s1, t_node *s2, t_info *info, ssize_t piv);
+void	pile_up_blocks(t_node *s1, t_node *s2, t_info *info, size_t size);
 
 #endif

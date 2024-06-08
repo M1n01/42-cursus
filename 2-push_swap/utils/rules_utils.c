@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-t_list	*lstdelone_node(t_list *trash)
+t_node *lstdelone_node(t_node *trash)
 {
-	t_list	*prev;
+	t_node *prev;
 
 	prev = trash->prev;
 	trash->next->prev = prev;
@@ -25,11 +24,11 @@ t_list	*lstdelone_node(t_list *trash)
 	return (prev->next);
 }
 
-void	lstcpy(t_list *src, t_list *dest)
+void lstcpy(t_node *src, t_node *dest)
 {
-	t_list	*new;
+	t_node *new;
 
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_node));
 	if (new == NULL)
 		ft_error(new);
 	new->value = src->value;
@@ -38,5 +37,5 @@ void	lstcpy(t_list *src, t_list *dest)
 	new->next = dest->next;
 	dest->next->prev = new;
 	dest->next = new;
-	return ;
+	return;
 }

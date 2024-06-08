@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-void	rotate_min_steps(t_list *stack, long step, char which, t_info *info)
+void rotate_min_steps(t_node *stack, long step, char which, t_info *info)
 {
 	if (step >= 0)
 	{
@@ -38,9 +37,9 @@ void	rotate_min_steps(t_list *stack, long step, char which, t_info *info)
 	}
 }
 
-static ssize_t	count_rotate(t_list *stack, t_list *find)
+static ssize_t count_rotate(t_node *stack, t_node *find)
 {
-	size_t	step;
+	size_t step;
 
 	if (find == NULL)
 		return (-1);
@@ -53,9 +52,9 @@ static ssize_t	count_rotate(t_list *stack, t_list *find)
 	return (step);
 }
 
-static ssize_t	count_rev_rotate(t_list *stack, t_list *find)
+static ssize_t count_rev_rotate(t_node *stack, t_node *find)
 {
-	size_t	step;
+	size_t step;
 
 	if (find == NULL)
 		return (-1);
@@ -68,10 +67,10 @@ static ssize_t	count_rev_rotate(t_list *stack, t_list *find)
 	return (step);
 }
 
-long	cal_steps(t_list *stack, t_list *find)
+long cal_steps(t_node *stack, t_node *find)
 {
-	long	rotate;
-	long	rev_rotate;
+	long rotate;
+	long rev_rotate;
 
 	rotate = count_rotate(stack, find);
 	rev_rotate = count_rev_rotate(stack, find);

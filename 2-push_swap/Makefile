@@ -4,9 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror $(addprefix -I,$(INCDIR))
 
 INCDIR	=	./include
-INC		=	$(INCDIR)/libft.h \
-			$(INCDIR)/utils.h \
-			$(INCDIR)/push_swap.h
+INC		=	$(INCDIR)/push_swap.h
 
 SRCDIR	=	./srcs
 SRCS	=	$(SRCDIR)/sort_long_middle.c \
@@ -32,27 +30,32 @@ UTILS	=	$(UTILDIR)/find_list.c \
 			$(UTILDIR)/info_utils.c
 UTILS_OBJ = $(UTILS:%.c=%.o)
 
-LIBDIR = ./libft
+LIBDIR = ../0-libft
 LIBFT = $(LIBDIR)/libft.a
+PRINTFDIR = ../1-printf
+PRINTF = $(PRINTFDIR)/libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(UTILS_OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) $(SRCS) $(UTILS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(UTILS_OBJ) $(LIBFT) $(PRINTF)
+		$(CC) $(CFLAGS) $(SRCS) $(UTILS) $(LIBFT) $(PRINTF) -o $(NAME)
 
 $(LIBFT):
 		$(MAKE) -C $(LIBDIR)
 
+$(PRINTF):
+		$(MAKE) -C $(PRINTFDIR)
+
 clean:
-		$(MAKE) fclean -C $(LIBDIR)
+		$(MAKE) fclean -C $(LIBDIR) $(PRINTFDIR)
 		$(RM) $(OBJS) $(B_OBJS) $(UTILS_OBJ)
 
 fclean: clean
-		$(RM) $(NAME) $(LIB)
+		$(RM) $(NAME) $(LIBFT) $(PRINTF)
 
 re: fclean all
 
-debug: CFLAGS += -g -fsanitize=address,leak
+debug: CFLAGS += -g -fsanitize=address,undefined
 debug: re
 
 .PHONY: all clean fclean re debug

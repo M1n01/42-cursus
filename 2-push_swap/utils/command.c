@@ -10,11 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
 #include "../include/utils.h"
 #include "../include/push_swap.h"
 
-int	ch_cmd(int cmd)
+int ch_cmd(int cmd)
 {
 	if (cmd == PA)
 		return (PB);
@@ -35,7 +34,7 @@ int	ch_cmd(int cmd)
 	return (cmd);
 }
 
-bool	exec_cmd(t_list *stack1, t_list *stack2, int cmd)
+bool exec_cmd(t_node *stack1, t_node *stack2, int cmd)
 {
 	if (cmd == SA && stack_size(stack1) > 1)
 		return (swap(stack1), true);
@@ -62,7 +61,7 @@ bool	exec_cmd(t_list *stack1, t_list *stack2, int cmd)
 	return (false);
 }
 
-void	command(t_list *stack1, t_list *stack2, int command)
+void command(t_node *stack1, t_node *stack2, int command)
 {
 	if (command == SA || command == SS)
 		swap(stack1);
@@ -82,7 +81,7 @@ void	command(t_list *stack1, t_list *stack2, int command)
 		rev_rotate(stack2);
 }
 
-void	print_command(int cmd)
+void print_command(int cmd)
 {
 	if (cmd == SA)
 		ft_printf("sa\n");
