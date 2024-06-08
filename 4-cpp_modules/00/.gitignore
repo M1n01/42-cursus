@@ -1,0 +1,9 @@
+*/*/*.o
+*/*/*.d
+*/a.out
+.DS_Store
+ex00/megaphone
+ex01/phoneBook
+ex02/account
+ex02/19920104_091532.log
+ex02/log
