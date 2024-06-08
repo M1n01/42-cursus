@@ -1,0 +1,8 @@
+*.a
+a.out
+.vscode
+.DS_Store
+obj
+test.sh
+printfTester
+test.c

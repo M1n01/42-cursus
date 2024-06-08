@@ -1,0 +1,10 @@
+*.a
+so_long
+a.out*
+*.txt
+.vscode
+.DS_Store
+*.o
+so_long_tester
+maps/big.ber
+*/debug*
