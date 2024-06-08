@@ -1,0 +1,11 @@
+a.out
+.vscode
+.DS_Store
+main.c
+*/*.o
+libft/*.o
+libft/ft_printf/*.o
+server
+client
+*.a
+test.sh

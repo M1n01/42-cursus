@@ -1,0 +1,12 @@
+*.a
+push_swap
+checker*
+a.out*
+*.txt
+.vscode
+.DS_Store
+*.o
+*tester*
+*/debug*
+*pain
+pain*
