@@ -11,18 +11,17 @@
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include "../include/libft.h"
 
-t_server	g_server;
+t_server g_server;
 
-static void	init_char(void)
+static void init_char(void)
 {
 	g_server.current_bit = 0;
 	g_server.binary = 0;
-	return ;
+	return;
 }
 
-static void	receive_bit(int signum)
+static void receive_bit(int signum)
 {
 	if (signum == SIGUSR1)
 		g_server.binary |= 1 << g_server.current_bit;
@@ -32,11 +31,11 @@ static void	receive_bit(int signum)
 	if (g_server.current_bit == 32)
 	{
 		g_server.client_pid = g_server.binary;
-		return ;
+		return;
 	}
 }
 
-void	receive_pid(void)
+void receive_pid(void)
 {
 	init_char();
 	g_server.client_pid = 0;
@@ -46,9 +45,9 @@ void	receive_pid(void)
 		pause();
 }
 
-static void	receive_char(int signum)
+static void receive_char(int signum)
 {
-	int	status;
+	int status;
 
 	if (signum == SIGUSR1)
 		g_server.binary |= 1 << g_server.current_bit;
@@ -58,7 +57,7 @@ static void	receive_char(int signum)
 	if (g_server.current_bit == 8)
 	{
 		if (g_server.binary == EOT)
-			return ;
+			return;
 		ft_putchar((unsigned char)g_server.binary);
 		init_char();
 	}
@@ -66,18 +65,18 @@ static void	receive_char(int signum)
 	if (status == -1)
 		ft_error("kill error\n");
 	usleep(10);
-	return ;
+	return;
 }
 
-void	receive_msg(void)
+void receive_msg(void)
 {
-	struct sigaction	s_sa;
+	struct sigaction s_sa;
 
 	init_char();
 	ft_bzero(&s_sa, sizeof(struct sigaction));
 	s_sa.sa_handler = receive_char;
 	s_sa.sa_flags = 0;
-	if (sigaction(SIGUSR1, &s_sa, NULL) == -1 || \
+	if (sigaction(SIGUSR1, &s_sa, NULL) == -1 ||
 		sigaction(SIGUSR2, &s_sa, NULL) == -1)
 		ft_error("sigaction error\n");
 	while (g_server.current_bit != 8 || g_server.binary != 4)

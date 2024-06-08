@@ -11,17 +11,16 @@
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include "../include/libft.h"
 
-static int	g_ack;
+static int g_ack;
 
-static void	send_pid(pid_t server_pid, pid_t client_pid);
-static void	send_msg(pid_t my_pid, char *msg);
+static void send_pid(pid_t server_pid, pid_t client_pid);
+static void send_msg(pid_t my_pid, char *msg);
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	pid_t	server_pid;
-	pid_t	client_pid;
+	pid_t server_pid;
+	pid_t client_pid;
 
 	if (argc != 3)
 		ft_error("Usage: ./client [server-pid] [message]");
@@ -34,10 +33,10 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-void	send_pid(pid_t server_pid, pid_t client_pid)
+void send_pid(pid_t server_pid, pid_t client_pid)
 {
-	int	i;
-	int	status;
+	int i;
+	int status;
 
 	i = 0;
 	while (i < 32)
@@ -53,11 +52,11 @@ void	send_pid(pid_t server_pid, pid_t client_pid)
 	}
 }
 
-static void	send_char(pid_t my_pid, char c)
+static void send_char(pid_t my_pid, char c)
 {
-	unsigned char	uc;
-	size_t			current_bit;
-	int				status;
+	unsigned char uc;
+	size_t current_bit;
+	int status;
 
 	uc = (unsigned char)c;
 	current_bit = 0;
@@ -75,20 +74,20 @@ static void	send_char(pid_t my_pid, char c)
 		while (g_ack != 0)
 			pause();
 	}
-	return ;
+	return;
 }
 
-static void	receive_ack(int signum)
+static void receive_ack(int signum)
 {
 	(void)signum;
 	g_ack = 1;
-	return ;
+	return;
 }
 
-static void	send_msg(pid_t my_pid, char *msg)
+static void send_msg(pid_t my_pid, char *msg)
 {
-	size_t				i;
-	struct sigaction	s_sa;
+	size_t i;
+	struct sigaction s_sa;
 
 	ft_bzero(&s_sa, sizeof(struct sigaction));
 	s_sa.sa_handler = receive_ack;
@@ -101,5 +100,5 @@ static void	send_msg(pid_t my_pid, char *msg)
 		i++;
 	}
 	send_char(my_pid, EOT);
-	return ;
+	return;
 }

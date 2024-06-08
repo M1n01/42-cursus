@@ -11,11 +11,10 @@
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
-#include "../include/libft.h"
 
-int	main(void)
+int main(void)
 {
-	pid_t	server_pid;
+	pid_t server_pid;
 
 	server_pid = getpid();
 	ft_printf("%d\n", server_pid);
