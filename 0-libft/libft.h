@@ -54,8 +54,11 @@ void	ft_error(void *p);
 
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
-void	ft_free(void *p);
+
 void	*ft_calloc(size_t count, size_t size);
+void	*ft_realloc(void *p, size_t size);
+void	ft_free(void *p);
+
 char	**ft_split(char const *s, char c);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
