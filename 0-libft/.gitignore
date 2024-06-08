@@ -3,3 +3,5 @@ libft-tester-tokyo
 .vscode
 a.out
 libftTester
+*.o
+*.a
