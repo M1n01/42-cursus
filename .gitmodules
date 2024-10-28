@@ -7,3 +7,6 @@
 [submodule "5-webserv"]
 	path = 5-webserv
 	url = git@github.com:yuidvg/webserv.git
+[submodule "6-transcendence"]
+	path = 6-transcendence
+	url = git@github.com:M1n01/ft_transcendence.git
