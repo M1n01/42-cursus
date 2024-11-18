@@ -2,7 +2,8 @@
 */*.pdf
 .DS_Store
 */.DS_Store
-*/.vscode
+.vscode/*
+*/**/.vscode/*
 
 */**/a.out
 
