@@ -16,7 +16,7 @@ fd_set read_set, write_set, current_set;
 int last_fd = 0, g_id = 0;
 char send_buffer[300000], recv_buffer[300000];
 
-void err(char *msg)
+void error(char *msg)
 {
 	if (msg)
 		write(2, msg, strlen(msg));
@@ -32,24 +32,23 @@ void send_to_all(int except)
 	{
 		if (FD_ISSET(fd, &write_set) && fd != except)
 			if (send(fd, send_buffer, strlen(send_buffer), 0) == -1)
-				err(NULL);
+				error(NULL);
 	}
 }
 
-int main(int argc, char *argv[])
+int main(int ac, char *av[])
 {
-	if (argc != 2)
-		err("Wrong number of arguments");
-
+	if (ac != 2)
+		error("Wrong number of arguments");
 	int sd = socket(AF_INET, SOCK_STREAM, 0);
 	if (sd == -1)
-		err(NULL);
+		error(NULL);
 
 	struct sockaddr_in addr;
 	socklen_t len;
 	bzero(&addr, sizeof(addr));
 	addr.sin_family = AF_INET;
-	addr.sin_port = htons(atoi(argv[1]));
+	addr.sin_port = htons(atoi(av[1]));
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 
 	FD_ZERO(&current_set);
@@ -58,7 +57,7 @@ int main(int argc, char *argv[])
 	last_fd = sd;
 
 	if (bind(sd, (const struct sockaddr *)&addr, sizeof(addr)) == -1 || listen(sd, 100) == -1)
-		err(NULL);
+		error(NULL);
 
 	while (1)
 	{
@@ -72,19 +71,19 @@ int main(int argc, char *argv[])
 			{
 				if (fd == sd)
 				{
-					int new_sd = accept(sd, (struct sockaddr *)&addr, &len);
-					if (new_sd == -1)
+					int new_fd = accept(sd, (struct sockaddr *)&addr, &len);
+					if (new_fd == -1)
 						continue;
-					if (new_sd > last_fd)
-						last_fd = new_sd;
-					clients[new_sd].id = g_id++;
-					FD_SET(new_sd, &current_set);
-					sprintf(send_buffer, "server: client %d just arrived\n", clients[new_sd].id);
-					send_to_all(new_sd);
+					if (new_fd > last_fd)
+						last_fd = new_fd;
+					clients[new_fd].id = g_id++;
+					FD_SET(new_fd, &current_set);
+					sprintf(send_buffer, "server: client %d just arrived\n", g_id);
+					send_to_all(new_fd);
 				}
 				else
 				{
-					int ret = recv(fd, recv_buffer, sizeof(recv_buffer), 0);
+					int ret = recv(fd, recv_buffer, strlen(recv_buffer), 0);
 					if (ret <= 0)
 					{
 						sprintf(send_buffer, "server: client %d just left\n", clients[fd].id);
